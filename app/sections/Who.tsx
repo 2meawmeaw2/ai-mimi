@@ -1,18 +1,9 @@
 "use client";
-import { ArrowDown } from "lucide-react";
 import React from "react";
-import { cn } from "@/lib/utils";
-import createGlobe from "cobe";
-import { useEffect, useRef } from "react";
-import { motion } from "motion/react";
-import { IconBrandYoutubeFilled } from "@tabler/icons-react";
 
 import { BackgroundBeams } from "@/components/ui/background-beams";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
 import FeaturesSectionDemo from "@/components/features-section-demo-3";
 const Who = () => {
-  useGSAP(() => {});
   return (
     <section
       id="Who"

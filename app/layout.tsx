@@ -1,19 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Outfit } from "next/font/google";
-import { Cairo } from "next/font/google";
-export const cairo = Cairo({
-  subsets: ["arabic"],
-  weight: ["300", "400", "200", "600", "500", "700", "800", "900"], // adjust as needed
-  display: "swap",
-  variable: "--font-cairo", // optional: CSS variable
-});
-const outfit = Outfit({
-  subsets: ["latin"],
-  weight: ["300", "400", "200", "100", "600", "500", "700", "800", "900"], // add other weights if needed
-  variable: "--font-outfit", // enables CSS variable usage
-  display: "swap",
-});
+import { cairo, outfit } from "@/lib/fonts"; // corrected path if needed
 
 export const metadata: Metadata = {
   title: "و أخييييراا",
