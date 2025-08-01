@@ -36,7 +36,7 @@ const Hero = () => {
       .from(
         ".ai",
         {
-          delay: 1,
+          delay: 0.2,
           autoAlpha: 0,
           yPercent: 50,
           duration: 1,
@@ -44,11 +44,7 @@ const Hero = () => {
         },
         0
       )
-      .to(".hero", {
-        clipPath: "polygon(49.5% 0%, 50.5% 0%, 50.5% 100%, 49.5% 100%)",
-        duration: 0.8,
-        ease: "power2.out",
-      })
+
       .to(
         ".hero",
         {
