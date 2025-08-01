@@ -6,7 +6,7 @@ const Who = () => {
   return (
     <section
       id="Who"
-      className="relative   w-full font-arabic bg-black z-60 mt-10 py-10"
+      className="relative   w-full font-arabic bg-black z-60 mt-[120vh] py-10"
     >
       <div className="w-[90%] mt-10 py-10 mx-auto my-10 rounded-lg  border-1 border-yellow flex flex-col items-center justify-center shadow-lg shadow-yellow/30 gap-4">
         <h1 className="text-4xl font-bold text-yellow text-shadow-lg text-shadow-yellow/30">
