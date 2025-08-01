@@ -35,47 +35,49 @@ const Win: React.FC = () => {
   const cards = [1, 2, 3, 4, 5];
 
   return (
-    <div className="win h-[100vh] w-full bg-black">
-      <h1 className="overflow-clip  text-center font-black text-4xl  text-yellow  py-6">
-        وش راح نربح من هذي الدورة
-      </h1>
-      <div className=" w-full h-full relative flex justify-center items-start">
-        {cards.map((_, i) => (
-          <SpotlightCard
-            key={i}
-            className={`card${i + 1} z-${
-              (i + 2) * 10
-            } absolute top-1/2 translate-y-[-50%] w-[60%] h-[40%] border-2 border-yellow shadow-sm shadow-yellow/60`}
-            spotlightColor="rgba(222, 197, 49, 0.3)"
-            style={{ transform: `translateY(-50%) ${rotations[i]}` }}
-          >
-            <div className="w-full h-full bg-black absolute inset-0 -z-10" />
-            <div className="w-full h-full bg-yellow/6 absolute inset-0 -z-10" />
-            <div className="flex flex-col items-start justify-center gap-10 h-full text-white max-w-xs p-6 ">
-              <div className="text-3xl">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="32"
-                  height="32"
-                  fill="gold"
-                  viewBox="0 0 24 24"
-                  style={{
-                    filter: "drop-shadow(0 0 8px rgba(255, 215, 0, 0.6))",
-                  }}
-                >
-                  <path d="M12 2l1.09 3.47L17 7l-3.47 1.09L12 12l-1.09-3.47L7 7l3.47-1.09L12 2zM6 14l.87 2.61L10 17l-2.13.39L6 20l-.87-2.61L2 17l2.13-.39L6 14zm12 0l.87 2.61L22 17l-2.13.39L18 20l-.87-2.61L14 17l2.13-.39L18 14z" />
-                </svg>
+    <div className="win min-h-[105vh] w-full bg-black">
+      <div className="w-full h-full sticky top-0">
+        <h1 className="overflow-clip  text-center font-black text-4xl  text-yellow  py-6">
+          وش راح نربح من هذي الدورة
+        </h1>
+        <div className=" w-full h-full relative  flex justify-center items-center ">
+          {cards.map((_, i) => (
+            <SpotlightCard
+              key={i}
+              className={`card${i + 1} z-${
+                (i + 2) * 10
+              }  w-[60%] h-[30%] max-w-100  border-2 border-yellow shadow-sm shadow-yellow/60`}
+              spotlightColor="rgba(222, 197, 49, 0.3)"
+              style={{ transform: `translateY(-50%) ${rotations[i]}` }}
+            >
+              <div className="w-full h-full bg-black absolute inset-0 -z-10" />
+              <div className="w-full h-full bg-yellow/6 absolute inset-0 -z-10" />
+              <div className="flex flex-col items-start justify-center gap-10 h-full text-white max-w-xs p-6 ">
+                <div className="text-3xl">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    fill="gold"
+                    viewBox="0 0 24 24"
+                    style={{
+                      filter: "drop-shadow(0 0 8px rgba(255, 215, 0, 0.6))",
+                    }}
+                  >
+                    <path d="M12 2l1.09 3.47L17 7l-3.47 1.09L12 12l-1.09-3.47L7 7l3.47-1.09L12 2zM6 14l.87 2.61L10 17l-2.13.39L6 20l-.87-2.61L2 17l2.13-.39L6 14zm12 0l.87 2.61L22 17l-2.13.39L18 20l-.87-2.61L14 17l2.13-.39L18 14z" />
+                  </svg>
+                </div>
+                <h2 className="text-xl font-black text-white text-right w-full">
+                  عزّز تجربتك
+                </h2>
+                <p className="text-sm text-white/70 leading-relaxed text-right">
+                  استفد من مزايا حصرية، وخصائص مميزة، ودعم متواصل على مدار
+                  الساعة كعضو دائم في النادي.
+                </p>
               </div>
-              <h2 className="text-xl font-black text-white text-right w-full">
-                عزّز تجربتك
-              </h2>
-              <p className="text-sm text-white/70 leading-relaxed text-right">
-                استفد من مزايا حصرية، وخصائص مميزة، ودعم متواصل على مدار الساعة
-                كعضو دائم في النادي.
-              </p>
-            </div>
-          </SpotlightCard>
-        ))}
+            </SpotlightCard>
+          ))}
+        </div>
       </div>
     </div>
   );

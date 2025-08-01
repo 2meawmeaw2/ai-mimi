@@ -8,19 +8,14 @@ import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from "gsap/SplitText";
 gsap.registerPlugin(useGSAP, SplitText);
+
 const Hero = () => {
   useGSAP(() => {
     const split = SplitText.create(".para", {
       type: "lines",
-      // only split into words and lines (not characters)
-
-      // there are many other options - see below for a complete list
     });
     const split2 = SplitText.create(".para2", {
       type: "words",
-      // only split into words and lines (not characters)
-
-      // there are many other options - see below for a complete list
     });
 
     gsap.set(".hero", {
@@ -52,7 +47,6 @@ const Hero = () => {
         duration: 0.8,
         ease: "power2.out",
       })
-
       .to(
         ".hero",
         {
@@ -89,7 +83,6 @@ const Hero = () => {
         },
         "-=100%"
       )
-
       .to(
         ".background-grid",
         {
@@ -99,7 +92,6 @@ const Hero = () => {
         },
         "<"
       )
-
       .to(
         ".line",
         {
@@ -108,7 +100,6 @@ const Hero = () => {
         },
         "-=1"
       )
-
       .from(
         split.lines,
         {
@@ -130,13 +121,14 @@ const Hero = () => {
         },
         ease: "power1.inOut",
       });
+
     gsap.to("#Hero", {
       autoAlpha: 0,
       scrollTrigger: {
         scrub: 1,
         trigger: "#Hero",
         start: "20% top",
-        end: "top center",
+        end: "60% top",
       },
     });
   });
@@ -144,27 +136,34 @@ const Hero = () => {
   return (
     <section id="Hero" className="sticky top-0 h-[120vh]">
       <div className="bg-black/50 absolute inset-0 z-50 w-full h-full black-overlay" />
-      <div className="pointer-events-none absolute z-60 top-50 w-full h-full  main-text ">
-        {" "}
-        <h2 className="overflow-clip text-center font-black py-3 text-7xl my-1 font-arabic ">
+
+      {/* Main text overlay - responsive positioning and sizing */}
+      <div className="pointer-events-none absolute z-60 top-[10%] sm:top-[15%] lg:top-[20%] w-full h-full main-text px-4 sm:px-6 lg:px-8">
+        {/* "وأخيرا" heading - responsive font sizes */}
+        <h2 className="overflow-clip text-center font-black py-2 sm:py-3 text-4xl sm:text-5xl md:text-6xl lg:text-7xl my-1 font-arabic">
           وأخيرا
         </h2>
-        <h1 className="overflow-clip ai text-center font-black text-8xl  text-yellow font-arabic py-6 ">
+
+        {/* Main AI course heading - responsive font sizes */}
+        <h1 className="overflow-clip ai text-center font-black text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-yellow font-arabic py-3 sm:py-4 lg:py-6">
           <ShinyText
             text="AI دورة"
             disabled={false}
             speed={3}
-            className="custom-class text-yellow/80 "
+            className="custom-class text-yellow/80"
           />
-          <div className="scale-x-0 origin-center line ">
-            <div className="absolute  translate-y-4 -translate-x-[5%]  bottom-0 bg-gradient-to-r from-transparent via-yellow-300 to-transparent h-[2px] w-[120%] blur-sm" />
-            <div className="absolute   translate-y-4 -translate-x-[5%]  bottom-0 bg-gradient-to-r from-transparent via-indigo-300 to-transparent h-px w-[120%]" />
-            <div className="absolute  translate-y-4 -translate-x-[5%]  bottom-0 bg-gradient-to-r from-transparent via-yellow to-transparent h-[5px] w-[120%] blur-sm" />
-            <div className="absolute  translate-y-4 -translate-x-[5%]  bottom-0 bg-gradient-to-r from-transparent via-yellow to-transparent h-px w-[120%]" />
+          <div className="scale-x-0 origin-center line">
+            <div className="absolute translate-y-2 sm:translate-y-3 lg:translate-y-4 -translate-x-[5%] bottom-0 bg-gradient-to-r from-transparent via-yellow-300 to-transparent h-[2px] w-[120%] blur-sm" />
+            <div className="absolute translate-y-2 sm:translate-y-3 lg:translate-y-4 -translate-x-[5%] bottom-0 bg-gradient-to-r from-transparent via-indigo-300 to-transparent h-px w-[120%]" />
+            <div className="absolute translate-y-2 sm:translate-y-3 lg:translate-y-4 -translate-x-[5%] bottom-0 bg-gradient-to-r from-transparent via-yellow to-transparent h-[5px] w-[120%] blur-sm" />
+            <div className="absolute translate-y-2 sm:translate-y-3 lg:translate-y-4 -translate-x-[5%] bottom-0 bg-gradient-to-r from-transparent via-yellow to-transparent h-px w-[120%]" />
           </div>
         </h1>
       </div>
-      <section className="hero relative z-20 h-screen w-full border-1 ">
+
+      {/* Hero section */}
+      <section className="hero relative z-20 h-screen w-full border-1">
+        {/* Background grid - responsive dot sizes and gaps */}
         <div className="absolute -z-10 inset-0 w-full h-full background-grid ">
           {" "}
           <DotGrid
@@ -183,35 +182,47 @@ const Hero = () => {
           <SparklesCore
             id="tsparticlesfullpage"
             background="transparent"
-            minSize={0.6}
+            minSize={0.9}
             maxSize={1}
             particleDensity={100}
             className="w-full h-full"
             particleColor="#dec531"
           />
         </div>
-        <div className=" relative  w-full h-full flex flex-col justify-evenly items-center  ">
+        {/* Main content container */}
+        <div className="relative w-full h-full flex flex-col justify-evenly items-center px-4 sm:px-6 lg:px-8">
+          {/* Spotlight - responsive positioning */}
           <Spotlight
-            className="-top-10 lg:-top-40 -left-10 lg:left-50 z-30 "
+            className="-top-5 sm:-top-10 lg:-top-40 -left-5 sm:-left-10 lg:left-50 z-30"
             fill="#dec531"
-          />{" "}
-          <div className="flex flex-col items-center justify-center  gap-2  w-[90%] max-w-[40rem] h-[70%] ">
-            <div className="w-full h-200 " />
+          />
+
+          {/* Content section - responsive sizing and spacing */}
+          <div className="flex flex-col items-center justify-center gap-2 w-[95%] sm:w-[90%] max-w-[40rem] h-[60%] sm:h-[70%] mt-16 sm:mt-20 lg:mt-24">
+            <div className="w-full h-20 sm:h-32 lg:h-40" />
             <div className="absolute z-50"></div>
-            <p className="overflow-clip para2  para text-center font-arabic text-2xl p-2 w-[100%] rounded-2xl bg-yellow text-black/50 mt-10 border-2 border-black">
+
+            {/* Main paragraph - responsive text size and padding */}
+            <p className="overflow-clip para2 para text-center font-arabic text-lg sm:text-xl lg:text-2xl p-3 sm:p-4 lg:p-2 w-[100%] rounded-xl sm:rounded-2xl bg-yellow text-black/50 mt-6 sm:mt-8 lg:mt-10 border-2 border-black leading-relaxed">
               ليمن: انا درتها لاصحاب المشاريع والفريلانسرز بصح تقدرو تشوفو
               البرنامج بالاك تفيدكم انتما تاني
             </p>
           </div>
-          <div className="w-full h-[20%] flex flex-col items-center justify-evenly  ">
-            <h2 className="overflow-clip para font-arabic font-black text-2xl text-white border-2 border-yellow rounded-2xl px-10 py-2  ">
+
+          {/* Bottom section - responsive spacing and sizes */}
+          <div className="w-full h-[15%] sm:h-[20%] flex flex-col items-center justify-evenly gap-3 sm:gap-4 pb-4 sm:pb-6 lg:pb-8">
+            {/* Button text - responsive sizing */}
+            <h2 className="overflow-clip para font-arabic font-black text-lg sm:text-xl lg:text-2xl text-white border-2 border-yellow rounded-xl sm:rounded-2xl px-6 sm:px-8 lg:px-10 py-2 lg:py-2">
               اضرب تقرعيجة
             </h2>
-            <ArrowDown className="size-15 rounded-full p-2 animate-bounce text-white bg-yellow shadow-lg shadow-yellow/80" />
+
+            {/* Arrow - responsive size */}
+            <ArrowDown className="size-12 sm:size-14 lg:size-15 rounded-full p-2 sm:p-3 lg:p-2 animate-bounce text-white bg-yellow shadow-lg shadow-yellow/80" />
           </div>
         </div>
       </section>
     </section>
   );
 };
+
 export default Hero;

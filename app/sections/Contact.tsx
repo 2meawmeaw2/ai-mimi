@@ -1,5 +1,4 @@
 "use client";
-import DotGrid from "../DotGrid/DotGrid";
 import { SparklesCore } from "@/components/ui/sparkles";
 import { useState } from "react";
 interface FormData {
@@ -28,35 +27,23 @@ const Contact: React.FC = () => {
     console.log("Submitted Data:", formData);
   };
   return (
-    <section className="relative h-screen w-full border-1 border-amber-100">
-      <div className="absolute -z-10 inset-0 w-full h-full ">
-        {" "}
-        <DotGrid
-          dotSize={2}
-          gap={10}
-          baseColor="#4f441c"
-          activeColor="#fff829"
-          proximity={120}
-          shockRadius={250}
-          shockStrength={5}
-          resistance={750}
-          returnDuration={1.5}
-        />
-      </div>
-      <div className="w-full absolute inset-0 h-screen">
+    <section className="relative h-screen w-full  ">
+      <div className="w-full absolute  inset-0 z-50 h-screen">
         <SparklesCore
           id="tsparticlesfullpage"
           background="transparent"
-          minSize={0.6}
-          maxSize={1}
+          minSize={2}
+          maxSize={3}
           particleDensity={100}
           className="w-full h-full"
-          particleColor="#dec531"
+          particleColor="#ffffff"
         />
       </div>
       <div className=" relative  w-full h-full flex flex-col justify-evenly items-center ">
         <div className="text-center mb-6 flex flex-col gap-6">
-          <h2 className="text-yellow-400 text-8xl font-black mb-2">افعلها</h2>
+          <h1 className="text-3xl md:text-5xl font-black text-yellow mb-4">
+            برنامج دورة الذكاء الاصطناعي
+          </h1>
           <p className="text-white text-2xl font-bold bg-black/60 rounded-2xl border-2 border-yellow px-9 py-2">
             سيي عفسة جديدة
           </p>

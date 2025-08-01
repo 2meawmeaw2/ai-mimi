@@ -11,7 +11,6 @@ export default function FeaturesSectionDemo() {
       title: ": وش درت",
       description:
         "سشتيسشنتيا سشنتا ينمشتا سيشنس تاين اسشنتا ينسشتا نيتاشسنمتيا تنشاس مينا شنتاس يمنتاش نمتاس",
-      skeleton: <SkeletonTwo />,
       className: "border-b col-span-1 lg:col-span-2 dark:border-neutral-800",
     },
     {
@@ -26,7 +25,6 @@ export default function FeaturesSectionDemo() {
       title: ": مياو",
       description:
         "سشتيسشنتيا سشنتا ينمشتا سيشنس تاين اسشنتا ينسشتا نيتاشسنمتيا تنشاس مينا شنتاس يمنتاش نمتاس",
-      skeleton: <SkeletonFour />,
       className: "col-span-1 lg:col-span-3 border-b lg:border-none",
     },
   ];
@@ -116,7 +114,7 @@ export const SkeletonThree = () => {
           {/* TODO */}
           <IconBrandYoutubeFilled className="h-20 w-20 absolute z-10 inset-0 text-red-500 m-auto " />
           <Image
-            src="https://assets.aceternity.com/fireship.jpg"
+            src="/file.svg"
             alt="header"
             width={800}
             height={800}
@@ -184,7 +182,9 @@ export const SkeletonTwo = () => {
             className="rounded-xl -mr-4 mt-4 p-1 bg-neutral-800 border border-neutral-700 shrink-0 overflow-hidden"
           >
             <Image
-              src={image}
+              width={100}
+              height={100}
+              src="/file.svg"
               alt="Scrolling image"
               className="rounded-lg h-20 w-20 md:h-40 md:w-40 object-cover shrink-0"
             />
@@ -208,7 +208,9 @@ export const SkeletonTwo = () => {
             className="rounded-xl -mr-4 mt-4 p-1 bg-neutral-800 border border-neutral-700 shrink-0 overflow-hidden"
           >
             <Image
-              src={image}
+              width={100}
+              height={100}
+              src="/file.svg"
               alt="Scrolling image"
               className="rounded-lg h-20 w-20 md:h-40 md:w-40 object-cover shrink-0"
             />
