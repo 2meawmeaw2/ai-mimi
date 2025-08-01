@@ -14,7 +14,6 @@ const Win: React.FC = () => {
         start: "top top",
         end: "bottom top",
         scrub: 1.5,
-        markers: true,
         pin: true,
       },
     });
