@@ -35,7 +35,7 @@ const Win: React.FC = () => {
   const cards = [1, 2, 3, 4, 5];
 
   return (
-    <div className="win h-[100vh] w-full ">
+    <div className="win h-[100vh] w-full bg-black">
       <h1 className="overflow-clip  text-center font-black text-4xl  text-yellow  py-6">
         وش راح نربح من هذي الدورة
       </h1>

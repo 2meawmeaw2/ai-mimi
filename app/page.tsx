@@ -11,11 +11,11 @@ export default function Home() {
   return (
     <div className="relative">
       <Hero />
-      <div className="sticky top-0 ">
+      <div className="">
         <Who />{" "}
         <section
           id="Who"
-          className="   h-[400vh] w-full font-arabic bg-black/100 z-50  py-10 "
+          className="   h-[400vh] w-full font-arabic bg-black z-50   "
         >
           <Win />
         </section>

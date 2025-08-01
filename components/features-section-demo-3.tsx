@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import createGlobe from "cobe";
 import { useEffect, useRef } from "react";
@@ -127,6 +127,7 @@ export const SkeletonThree = () => {
     </a>
   );
 };
+
 export const SkeletonTwo = () => {
   const images = [
     "https://images.unsplash.com/photo-1517322048670-4fba75cbbb62?q=80&w=3000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -136,7 +137,6 @@ export const SkeletonTwo = () => {
     "https://images.unsplash.com/photo-1546484475-7f7bd55792da?q=80&w=2581&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   ];
 
-  // Create a longer array for smoother looping
   const imageSet = [...images, ...images, ...images, ...images];
 
   const imageVariants = {
@@ -147,7 +147,6 @@ export const SkeletonTwo = () => {
     },
   };
 
-  // Animation settings
   const scrollAnimation = {
     animate: {
       x: ["0%", "-100%"],
@@ -161,9 +160,17 @@ export const SkeletonTwo = () => {
     },
   };
 
+  const [rotations, setRotations] = useState<number[]>([]);
+
+  useEffect(() => {
+    const generateRotations = Array(imageSet.length)
+      .fill(0)
+      .map(() => Math.random() * 20 - 10);
+    setRotations(generateRotations);
+  }, [imageSet.length]);
+
   return (
     <div className="relative flex flex-col items-start p-8 gap-10 h-full overflow-hidden bg-black rounded-2xl">
-      {/* First scrolling row */}
       <motion.div
         className="flex flex-row -ml-20"
         {...scrollAnimation}
@@ -173,9 +180,6 @@ export const SkeletonTwo = () => {
           <motion.div
             variants={imageVariants}
             key={`first-${idx}`}
-            style={{
-              rotate: Math.random() * 20 - 10,
-            }}
             whileHover="whileHover"
             className="rounded-xl -mr-4 mt-4 p-1 bg-neutral-800 border border-neutral-700 shrink-0 overflow-hidden"
           >
@@ -188,7 +192,6 @@ export const SkeletonTwo = () => {
         ))}
       </motion.div>
 
-      {/* Second scrolling row */}
       <motion.div
         className="flex flex-row -ml-40"
         {...scrollAnimation}
@@ -198,10 +201,10 @@ export const SkeletonTwo = () => {
           <motion.div
             variants={imageVariants}
             key={`second-${idx}`}
-            style={{
-              rotate: Math.random() * 20 - 10,
-            }}
             whileHover="whileHover"
+            style={{
+              rotate: rotations[idx] || 0,
+            }}
             className="rounded-xl -mr-4 mt-4 p-1 bg-neutral-800 border border-neutral-700 shrink-0 overflow-hidden"
           >
             <img
@@ -213,9 +216,8 @@ export const SkeletonTwo = () => {
         ))}
       </motion.div>
 
-      {/* Gradient overlays */}
-      <div className="absolute left-0 z-[100] inset-y-0 w-20 bg-gradient-to-r  from-yellow/20 via-80% via-black/30 to-100% to-black/0  h-full pointer-events-none" />
-      <div className="absolute right-0 z-[100] inset-y-0 w-20 bg-gradient-to-l  from-yellow/20 via-80% via-black/30 to-100% to-black/0  h-full pointer-events-none" />
+      <div className="absolute left-0 z-[100] inset-y-0 w-20 bg-gradient-to-r from-yellow/20 via-80% via-black/30 to-100% to-black/0 h-full pointer-events-none" />
+      <div className="absolute right-0 z-[100] inset-y-0 w-20 bg-gradient-to-l from-yellow/20 via-80% via-black/30 to-100% to-black/0 h-full pointer-events-none" />
     </div>
   );
 };

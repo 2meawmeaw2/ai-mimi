@@ -126,15 +126,24 @@ const Hero = () => {
         color: "black",
         duration: 0.1,
         stagger: {
-          each: 0.1,
+          each: 0.03,
           from: "end",
         },
         ease: "power1.inOut",
       });
+    gsap.to("#Hero", {
+      autoAlpha: 0,
+      scrollTrigger: {
+        scrub: 1,
+        trigger: "#Hero",
+        start: "20% top",
+        end: "top center",
+      },
+    });
   });
 
   return (
-    <section id="Hero" className="sticky top-0">
+    <section id="Hero" className="sticky top-0 h-[120vh]">
       <div className="bg-black/50 absolute inset-0 z-50 w-full h-full black-overlay" />
       <div className="pointer-events-none absolute z-60 top-50 w-full h-full  main-text ">
         {" "}
@@ -187,8 +196,8 @@ const Hero = () => {
             className="-top-10 lg:-top-40 -left-10 lg:left-50 z-30 "
             fill="#dec531"
           />{" "}
-          <div className="flex flex-col items-center justify-center  gap-2  w-[90%] max-w-[40rem] h-[50%] ">
-            <div className="w-full h-100" />
+          <div className="flex flex-col items-center justify-center  gap-2  w-[90%] max-w-[40rem] h-[70%] ">
+            <div className="w-full h-200 " />
             <div className="absolute z-50"></div>
             <p className="overflow-clip para2  para text-center font-arabic text-2xl p-2 w-[100%] rounded-2xl bg-yellow text-black/50 mt-10 border-2 border-black">
               ليمن: انا درتها لاصحاب المشاريع والفريلانسرز بصح تقدرو تشوفو
