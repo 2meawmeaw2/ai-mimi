@@ -10,6 +10,9 @@ gsap.registerPlugin(useGSAP, SplitText);
 
 const Hero = () => {
   useGSAP(() => {
+    gsap.set("body", {
+      overflow: "clip",
+    });
     const split = SplitText.create(".para", {
       type: "lines",
     });
@@ -60,6 +63,11 @@ const Hero = () => {
         {
           autoAlpha: 0,
           ease: "power2.out",
+          onComplete: () => {
+            gsap.set("body", {
+              clearProps: "overflowX",
+            });
+          },
         },
         "<"
       )
@@ -133,7 +141,7 @@ const Hero = () => {
   });
 
   return (
-    <section id="Hero" className="sticky top-0 h-[120vh]">
+    <section id="Hero" className="sticky top-0 h-[120vh] w-[100vw] ">
       <div className="bg-black/50 absolute inset-0 z-50 w-full h-full black-overlay" />
 
       {/* Main text overlay - responsive positioning and sizing */}

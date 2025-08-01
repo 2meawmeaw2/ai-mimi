@@ -1,6 +1,12 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+html,
+body {
+  overflow-x: hidden;
+  width: 100vw;
+  position: relative;
+}
 :root {
   --white: #ffffff;
   --font-arabic: var(--font-cairo);
@@ -91,6 +97,7 @@ body {
   background: var(--black);
   color: var(--white);
   font-family: var(--font-arabic);
+  overflow-x: hidden;
 }
 
 @layer utilities {

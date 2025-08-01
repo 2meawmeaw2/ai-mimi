@@ -48,77 +48,84 @@ const Program: React.FC = () => {
     (sum, module) => sum + module.lessons,
     0
   );
+
   return (
-    <section className="bg-black text-white font-arabic min-h-screen py-12 px-4 md:px-8">
+    <section className="bg-black text-white font-arabic min-h-screen py-8 sm:py-12 px-3 sm:px-4 md:px-8">
       {/* Header */}
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-3xl md:text-5xl font-black text-yellow mb-4">
+        <div className="text-center mb-8 sm:mb-12">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-yellow mb-3 sm:mb-4">
             برنامج دورة الذكاء الاصطناعي
           </h1>
-          <p className="text-lg md:text-xl text-yellow/70 mb-8 max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-yellow/70 mb-6 sm:mb-8 max-w-3xl mx-auto px-2">
             تعلم الذكاء الاصطناعي من الصفر حتى الاحتراف مع مشاريع عملية وشهادة
             معتمدة
           </p>
 
           {/* Course Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 max-w-2xl mx-auto">
-            <div className="bg-yellow/10 border border-yellow/20 rounded-xl p-4 md:p-6">
-              <div className="text-2xl md:text-3xl font-bold text-yellow mb-2">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4 max-w-md mx-auto">
+            <div className="bg-yellow/10 border border-yellow/20 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6">
+              <div className="text-xl sm:text-2xl md:text-3xl font-bold text-yellow mb-1 sm:mb-2">
                 {totalWeeks}
               </div>
-              <div className="text-sm md:text-base text-yellow/70">أسبوع</div>
+              <div className="text-xs sm:text-sm md:text-base text-yellow/70">
+                أسبوع
+              </div>
             </div>
-            <div className="bg-yellow/10 border border-yellow/20 rounded-xl p-4 md:p-6">
-              <div className="text-2xl md:text-3xl font-bold text-yellow mb-2">
+            <div className="bg-yellow/10 border border-yellow/20 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6">
+              <div className="text-xl sm:text-2xl md:text-3xl font-bold text-yellow mb-1 sm:mb-2">
                 {totalLessons}
               </div>
-              <div className="text-sm md:text-base text-yellow/70">درس</div>
+              <div className="text-xs sm:text-sm md:text-base text-yellow/70">
+                درس
+              </div>
             </div>
-            <div className="bg-yellow/10 border border-yellow/20 rounded-xl p-4 md:p-6 col-span-2 md:col-span-1">
-              <div className="text-2xl md:text-3xl font-bold text-yellow mb-2">
+            <div className="bg-yellow/10 border border-yellow/20 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 col-span-2 sm:col-span-1">
+              <div className="text-xl sm:text-2xl md:text-3xl font-bold text-yellow mb-1 sm:mb-2">
                 6
               </div>
-              <div className="text-sm md:text-base text-yellow/70">وحدات</div>
+              <div className="text-xs sm:text-sm md:text-base text-yellow/70">
+                وحدات
+              </div>
             </div>
           </div>
         </div>
 
         {/* Course Modules */}
-        <div className="space-y-4 md:space-y-6">
+        <div className="space-y-3 sm:space-y-4 md:space-y-6">
           {courseModules.map((module, index) => (
             <div
               key={index}
-              className={`bg-yellow/5 border rounded-xl overflow-hidden transition-all duration-300 ${
+              className={`bg-yellow/5 border rounded-lg sm:rounded-xl overflow-hidden transition-all duration-300 ${
                 activeModule === index
-                  ? "border-yellow shadow-lg shadow-yellow/20"
+                  ? "border-yellow shadow-md sm:shadow-lg shadow-yellow/20"
                   : "border-gray-700 hover:border-yellow/50"
               }`}
             >
               {/* Module Header */}
               <div
-                className="p-4 md:p-6 cursor-pointer"
+                className="p-3 sm:p-4 md:p-6 cursor-pointer"
                 onClick={() =>
                   setActiveModule(activeModule === index ? -1 : index)
                 }
               >
-                <div className="flex items-center justify-between">
+                <div className="flex items-start justify-between gap-2">
                   <div className="flex-1">
-                    <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 mb-2">
-                      <div className="w-8 h-8 md:w-10 md:h-10 bg-yellow rounded-full flex items-center justify-center flex-shrink-0">
-                        <span className="text-black font-bold text-sm md:text-base">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 md:gap-4 mb-2">
+                      <div className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 bg-yellow rounded-full flex items-center justify-center flex-shrink-0">
+                        <span className="text-black font-bold text-xs sm:text-sm md:text-base">
                           {index + 1}
                         </span>
                       </div>
-                      <h3 className="text-lg md:text-2xl font-bold text-yellow">
+                      <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-yellow">
                         {module.title}
                       </h3>
                     </div>
 
-                    <div className="flex flex-wrap gap-3 md:gap-6 text-sm md:text-base text-yellow/70 mr-0 md:mr-14">
-                      <div className="flex items-center gap-2">
+                    <div className="flex flex-wrap gap-2 sm:gap-3 md:gap-4 text-xs sm:text-sm md:text-base text-yellow/70 sm:mr-14">
+                      <div className="flex items-center gap-1 sm:gap-2">
                         <svg
-                          className="w-4 h-4"
+                          className="w-3 h-3 sm:w-4 sm:h-4"
                           fill="currentColor"
                           viewBox="0 0 20 20"
                         >
@@ -130,9 +137,9 @@ const Program: React.FC = () => {
                         </svg>
                         <span>{module.duration}</span>
                       </div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-1 sm:gap-2">
                         <svg
-                          className="w-4 h-4"
+                          className="w-3 h-3 sm:w-4 sm:h-4"
                           fill="currentColor"
                           viewBox="0 0 20 20"
                         >
@@ -143,9 +150,9 @@ const Program: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="flex-shrink-0 mr-2 md:mr-4">
+                  <div className="flex-shrink-0 mt-1 sm:mt-0">
                     <svg
-                      className={`w-5 h-5 md:w-6 md:h-6 text-yellow transition-transform duration-300 ${
+                      className={`w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-yellow transition-transform duration-300 ${
                         activeModule === index ? "rotate-180" : ""
                       }`}
                       fill="none"
@@ -165,20 +172,20 @@ const Program: React.FC = () => {
 
               {/* Module Content */}
               {activeModule === index && (
-                <div className="border-t border-gray-700 p-4 md:p-6 bg-black/30">
-                  <h4 className="text-lg md:text-xl font-semibold text-yellow mb-4 text-right">
+                <div className="border-t border-gray-700 p-3 sm:p-4 md:p-6 bg-black/30">
+                  <h4 className="text-base sm:text-lg md:text-xl font-semibold text-yellow mb-3 sm:mb-4 text-right">
                     المواضيع المشمولة:
                   </h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 md:gap-4">
                     {module.topics.map((topic, topicIndex) => (
                       <div
                         key={topicIndex}
-                        className="flex items-center justify-end gap-3 p-3 bg-yellow/5 rounded-lg border border-yellow/10"
+                        className="flex items-center justify-end gap-2 sm:gap-3 p-2 sm:p-3 bg-yellow/5 rounded-md sm:rounded-lg border border-yellow/10"
                       >
-                        <span className="text-white text-sm md:text-base text-right">
+                        <span className="text-white text-sm sm:text-base text-right">
                           {topic}
                         </span>
-                        <div className="w-2 h-2 bg-yellow rounded-full flex-shrink-0"></div>
+                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-yellow rounded-full flex-shrink-0"></div>
                       </div>
                     ))}
                   </div>
@@ -189,16 +196,16 @@ const Program: React.FC = () => {
         </div>
 
         {/* Call to Action */}
-        <div className="mt-12 md:mt-16 text-center">
-          <div className="bg-gradient-to-r from-yellow/10 to-yellow/5 border border-yellow/20 rounded-2xl p-6 md:p-8 max-w-2xl mx-auto">
-            <h3 className="text-xl md:text-2xl font-bold text-yellow mb-4">
+        <div className="mt-8 sm:mt-12 md:mt-16 text-center">
+          <div className="bg-gradient-to-r from-yellow/10 to-yellow/5 border border-yellow/20 rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-8 max-w-2xl mx-auto">
+            <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-yellow mb-3 sm:mb-4">
               ابدأ رحلتك في الذكاء الاصطناعي اليوم
             </h3>
-            <p className="text-yellow/70 mb-6 text-sm md:text-base">
+            <p className="text-yellow/70 mb-4 sm:mb-6 text-xs sm:text-sm md:text-base px-1">
               انضم إلى آلاف الطلاب الذين تعلموا الذكاء الاصطناعي وغيروا مسارهم
               المهني
             </p>
-            <button className="bg-yellow text-black font-bold py-3 md:py-4 px-6 md:px-8 rounded-xl hover:bg-yellow/90 transition-colors duration-300 text-sm md:text-base w-full md:w-auto">
+            <button className="bg-yellow text-black font-bold py-2.5 sm:py-3 md:py-4 px-4 sm:px-6 md:px-8 rounded-lg sm:rounded-xl hover:bg-yellow/90 transition-colors duration-300 text-sm sm:text-base w-full max-w-xs mx-auto">
               سجل الآن واحصل على خصم 30%
             </button>
           </div>

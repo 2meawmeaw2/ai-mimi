@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import createGlobe from "cobe";
-import { useEffect, useRef } from "react";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { IconBrandYoutubeFilled } from "@tabler/icons-react";
 import Image from "next/image";
+
 export default function FeaturesSectionDemo() {
   const features = [
     {
@@ -18,8 +18,7 @@ export default function FeaturesSectionDemo() {
       description:
         "سشتيسشنتيا سشنتا ينمشتا سيشنس تاين اسشنتا ينسشتا نيتاشسنمتيا تنشاس مينا شنتاس يمنتاش نمتاس",
       skeleton: <SkeletonThree />,
-      className:
-        "col-span-1 lg:col-span-3 lg:border-r  dark:border-neutral-800",
+      className: "col-span-1 lg:col-span-3 lg:border-r dark:border-neutral-800",
     },
     {
       title: ": مياو",
@@ -28,15 +27,18 @@ export default function FeaturesSectionDemo() {
       className: "col-span-1 lg:col-span-3 border-b lg:border-none",
     },
   ];
+
   return (
-    <div className="relative z-20 py-10 lg:py-40 max-w-7xl mx-auto">
-      <div className="relative ">
-        <div className="grid grid-cols-1 lg:grid-cols-6 mt-12 xl:border rounded-md dark:border-neutral-800">
+    <div className="relative z-20 py-6 md:py-10 lg:py-40 max-w-7xl mx-auto px-4">
+      <div className="relative">
+        <div className="grid grid-cols-1 lg:grid-cols-6 mt-8 md:mt-12 xl:border rounded-md dark:border-neutral-800">
           {features.map((feature) => (
             <FeatureCard key={feature.title} className={feature.className}>
               <FeatureTitle>{feature.title}</FeatureTitle>
               <FeatureDescription>{feature.description}</FeatureDescription>
-              <div className=" h-full w-full">{feature.skeleton}</div>
+              {feature.skeleton && (
+                <div className="h-full w-full mt-4">{feature.skeleton}</div>
+              )}
             </FeatureCard>
           ))}
         </div>
@@ -53,7 +55,9 @@ const FeatureCard = ({
   className?: string;
 }) => {
   return (
-    <div className={cn(`p-4 sm:p-8 relative overflow-hidden `, className)}>
+    <div
+      className={cn(`p-4 sm:p-6 md:p-8 relative overflow-hidden`, className)}
+    >
       {children}
     </div>
   );
@@ -61,7 +65,7 @@ const FeatureCard = ({
 
 const FeatureTitle = ({ children }: { children?: React.ReactNode }) => {
   return (
-    <p className=" max-w-5xl mx-auto text-right tracking-tight text-white text-xl md:text-2xl md:leading-snug">
+    <p className="max-w-5xl mx-auto text-right tracking-tight text-white text-lg md:text-xl lg:text-2xl md:leading-snug">
       {children}
     </p>
   );
@@ -69,14 +73,33 @@ const FeatureTitle = ({ children }: { children?: React.ReactNode }) => {
 
 const FeatureDescription = ({ children }: { children?: React.ReactNode }) => {
   return (
-    <p
-      className={cn(
-        "text-sm md:text-base w-full  text-right ",
-        "text-right max-w-100 ml-auto my-2"
-      )}
-    >
-      {children}ssssss
+    <p className="text-xs sm:text-sm md:text-base w-full text-right max-w-full ml-auto my-2">
+      {children}
     </p>
+  );
+};
+
+const SkeletonThree = () => {
+  return (
+    <a
+      href="https://www.youtube.com/watch?v=RPa3_AD1_Vs"
+      target="__blank"
+      className="relative flex gap-10 h-full group/image"
+    >
+      <div className="w-full mx-auto bg-transparent dark:bg-transparent group h-full">
+        <div className="flex flex-1 w-full h-full flex-col space-y-2 relative">
+          <IconBrandYoutubeFilled className="h-10 w-10 md:h-16 md:w-16 lg:h-20 lg:w-20 absolute z-10 inset-0 text-red-500 m-auto" />
+          <div className="relative aspect-video w-full">
+            <Image
+              src="/file.svg"
+              alt="header"
+              fill
+              className="object-cover object-center rounded-sm blur-none group-hover/image:blur-md transition-all duration-200"
+            />
+          </div>
+        </div>
+      </div>
+    </a>
   );
 };
 
@@ -99,30 +122,6 @@ export const SkeletonOne = () => {
       <div className="absolute bottom-0 z-40 inset-x-0 h-60 bg-gradient-to-t from-white dark:from-black via-white dark:via-black to-transparent w-full pointer-events-none" />
       <div className="absolute top-0 z-40 inset-x-0 h-60 bg-gradient-to-b from-white dark:from-black via-transparent to-transparent w-full pointer-events-none" />
     </div>
-  );
-};
-
-export const SkeletonThree = () => {
-  return (
-    <a
-      href="https://www.youtube.com/watch?v=RPa3_AD1_Vs"
-      target="__blank"
-      className="relative flex gap-10  h-full group/image"
-    >
-      <div className="w-full  mx-auto bg-transparent dark:bg-transparent group h-full">
-        <div className="flex flex-1 w-full h-full flex-col space-y-2  relative">
-          {/* TODO */}
-          <IconBrandYoutubeFilled className="h-20 w-20 absolute z-10 inset-0 text-red-500 m-auto " />
-          <Image
-            src="/file.svg"
-            alt="header"
-            width={800}
-            height={800}
-            className="h-full w-full aspect-square object-cover object-center rounded-sm blur-none group-hover/image:blur-md transition-all duration-200"
-          />
-        </div>
-      </div>
-    </a>
   );
 };
 
