@@ -16,7 +16,7 @@ export default function RootLayout({
     <html lang="en">
       <ReactLenis root>
         <body
-          className={`relative ${cairo.variable} ${outfit.variable} font-arabic antialiased overflow-x-clip`}
+          className={` relative ${cairo.variable} ${outfit.variable} font-arabic antialiased overflow-x-clip`}
         >
           <nav className="w-full sticky top-0 z-10 h-[4rem] bg-yellow/20"></nav>
           {children}

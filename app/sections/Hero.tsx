@@ -10,9 +10,9 @@ gsap.registerPlugin(useGSAP, SplitText);
 
 const Hero = () => {
   useGSAP(() => {
-    gsap.set("body", {
-      overflow: "clip",
-    });
+    document.body.classList.add("overflow-y-clip");
+    document.body.classList.add("h-[100vh]");
+
     const split = SplitText.create(".para", {
       type: "lines",
     });
@@ -64,9 +64,8 @@ const Hero = () => {
           autoAlpha: 0,
           ease: "power2.out",
           onComplete: () => {
-            gsap.set("body", {
-              clearProps: "overflowX",
-            });
+            document.body.classList.remove("overflow-y-clip");
+            document.body.classList.remove("h-[100vh]");
           },
         },
         "<"
