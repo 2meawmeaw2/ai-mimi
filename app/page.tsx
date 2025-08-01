@@ -1,10 +1,7 @@
 "use client";
-import Image from "next/image";
 import Hero from "./sections/Hero";
-import Contact from "./sections/Contact";
 import Who from "./sections/Who";
 
-import SpotlightCard from "./SpotlightCard/SpotlightCard";
 import Win from "./sections/win";
 
 export default function Home() {

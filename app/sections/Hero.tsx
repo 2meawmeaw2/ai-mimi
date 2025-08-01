@@ -7,17 +7,16 @@ import { ArrowDown } from "lucide-react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from "gsap/SplitText";
-import TextType from "../TextType/TextType";
 gsap.registerPlugin(useGSAP, SplitText);
 const Hero = () => {
   useGSAP(() => {
-    let split = SplitText.create(".para", {
+    const split = SplitText.create(".para", {
       type: "lines",
       // only split into words and lines (not characters)
 
       // there are many other options - see below for a complete list
     });
-    let split2 = SplitText.create(".para2", {
+    const split2 = SplitText.create(".para2", {
       type: "words",
       // only split into words and lines (not characters)
 

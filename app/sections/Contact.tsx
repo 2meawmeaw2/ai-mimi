@@ -1,9 +1,6 @@
 "use client";
 import DotGrid from "../DotGrid/DotGrid";
 import { SparklesCore } from "@/components/ui/sparkles";
-import { Spotlight } from "@/components/ui/spotlight";
-import ShinyText from "../ShinyText/ShinyText";
-import { ArrowDown } from "lucide-react";
 import { useState } from "react";
 interface FormData {
   name: string;
