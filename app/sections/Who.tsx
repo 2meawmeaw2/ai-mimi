@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 
-import { BackgroundBeams } from "@/components/ui/background-beams";
 import FeaturesSectionDemo from "@/components/features-section-demo-3";
 const Who = () => {
   return (

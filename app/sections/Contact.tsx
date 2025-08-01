@@ -1,5 +1,4 @@
 "use client";
-import { SparklesCore } from "@/components/ui/sparkles";
 import { useState } from "react";
 interface FormData {
   name: string;
@@ -28,17 +27,6 @@ const Contact: React.FC = () => {
   };
   return (
     <section className="relative h-screen w-full  ">
-      <div className="w-full absolute  inset-0 z-50 h-screen">
-        <SparklesCore
-          id="tsparticlesfullpage"
-          background="transparent"
-          minSize={2}
-          maxSize={3}
-          particleDensity={100}
-          className="w-full h-full"
-          particleColor="#ffffff"
-        />
-      </div>
       <div className=" relative  w-full h-full flex flex-col justify-evenly items-center ">
         <div className="text-center mb-6 flex flex-col gap-6">
           <h1 className="text-3xl md:text-5xl font-black text-yellow mb-4">

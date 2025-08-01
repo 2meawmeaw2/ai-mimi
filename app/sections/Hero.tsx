@@ -1,6 +1,5 @@
 "use client";
 import DotGrid from "../DotGrid/DotGrid";
-import { SparklesCore } from "@/components/ui/sparkles";
 import { Spotlight } from "@/components/ui/spotlight";
 import ShinyText from "../ShinyText/ShinyText";
 import { ArrowDown } from "lucide-react";
@@ -178,17 +177,7 @@ const Hero = () => {
             returnDuration={1.5}
           />
         </div>
-        <div className="w-full absolute inset-0 h-screen ">
-          <SparklesCore
-            id="tsparticlesfullpage"
-            background="transparent"
-            minSize={0.9}
-            maxSize={1}
-            particleDensity={100}
-            className="w-full h-full"
-            particleColor="#dec531"
-          />
-        </div>
+
         {/* Main content container */}
         <div className="relative w-full h-full flex flex-col justify-evenly items-center px-4 sm:px-6 lg:px-8">
           {/* Spotlight - responsive positioning */}
