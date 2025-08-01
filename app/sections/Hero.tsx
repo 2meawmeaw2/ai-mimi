@@ -161,7 +161,7 @@ const Hero = () => {
       </div>
 
       {/* Hero section */}
-      <section className="hero relative z-20 h-screen w-full border-1">
+      <section className="hero relative z-20 h-screen w-full ">
         {/* Background grid - responsive dot sizes and gaps */}
         <div className="absolute -z-10 inset-0 w-full h-full background-grid ">
           {" "}

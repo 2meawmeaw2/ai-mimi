@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { cairo, outfit } from "@/lib/fonts"; // corrected path if needed
-
+import { ReactLenis } from "@/lib/ReactLenis";
 export const metadata: Metadata = {
   title: "و أخييييراا",
   description: "كورس شاااامل في ai",
@@ -14,12 +14,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${cairo.variable} ${outfit.variable} font-arabic antialiased overflow-x-clip`}
-      >
-        <nav className="w-full h-[4rem] bg-red-100"></nav>
-        {children}
-      </body>
+      <ReactLenis root>
+        <body
+          className={`${cairo.variable} ${outfit.variable} font-arabic antialiased overflow-x-clip`}
+        >
+          <nav className="w-full sticky top-0 z-10 h-[4rem] bg-yellow/20"></nav>
+          {children}
+        </body>
+      </ReactLenis>
     </html>
   );
 }

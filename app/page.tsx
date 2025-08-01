@@ -3,6 +3,7 @@ import Who from "./sections/Who";
 import Program from "./sections/program";
 import Win from "./sections/win";
 import Contact from "./sections/Contact";
+
 export default function Home() {
   const steps = [
     "Enter your email address",

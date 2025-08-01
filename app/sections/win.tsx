@@ -34,7 +34,7 @@ const Win: React.FC = () => {
   const cards = [1, 2, 3, 4, 5];
 
   return (
-    <div className="win min-h-[105vh] w-full bg-black">
+    <div className="win min-h-[105vh] w-full bg-black pt-20">
       <div className="w-full h-full sticky top-0">
         <h1 className="overflow-clip  text-center font-black text-4xl  text-yellow  py-6">
           وش راح نربح من هذي الدورة
@@ -45,7 +45,7 @@ const Win: React.FC = () => {
               key={i}
               className={`card${i + 1} z-${
                 (i + 2) * 10
-              }  w-[60%] h-[30%] max-w-100  border-2 border-yellow shadow-sm shadow-yellow/60`}
+              }  w-[60%] h-[40%] max-w-100  border-2 border-yellow shadow-sm shadow-yellow/60`}
               spotlightColor="rgba(222, 197, 49, 0.3)"
               style={{ transform: `translateY(-50%) ${rotations[i]}` }}
             >
