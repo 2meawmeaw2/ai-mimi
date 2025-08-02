@@ -5,13 +5,6 @@ import Win from "./sections/win";
 import Contact from "./sections/Contact";
 
 export default function Home() {
-  const steps = [
-    "Enter your email address",
-    "Create a strong password",
-    "Set up two-factor authentication",
-    "Verify your identity",
-  ];
-
   return (
     <>
       <Hero />

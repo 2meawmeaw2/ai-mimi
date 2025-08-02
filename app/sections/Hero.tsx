@@ -166,20 +166,6 @@ const Hero = () => {
       {/* Hero section */}
       <section className="hero relative z-20 h-screen w-full ">
         {/* Background grid - responsive dot sizes and gaps */}
-        <div className="absolute -z-10 inset-0 w-full h-full background-grid ">
-          {" "}
-          <DotGrid
-            dotSize={2}
-            gap={10}
-            baseColor="#4f441c"
-            activeColor="#fff829"
-            proximity={120}
-            shockRadius={250}
-            shockStrength={5}
-            resistance={750}
-            returnDuration={1.5}
-          />
-        </div>
 
         {/* Main content container */}
         <div className="relative w-full h-full flex flex-col justify-evenly items-center px-4 sm:px-6 lg:px-8">
