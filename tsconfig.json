@@ -27,7 +27,10 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "public/robot.jsx"
+    "public/robot.jsx",
+    "app/3d/try.jsx",
+    "app/3d/Canvas.jsx",
+    "app/3d/Canvas.jsx"
   ],
   "exclude": ["node_modules"]
 }

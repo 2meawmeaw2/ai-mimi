@@ -12,17 +12,40 @@ const Win: React.FC = () => {
       scrollTrigger: {
         trigger: ".win",
         start: "top top",
-        end: "bottom top",
+        end: "300% top",
         scrub: 1.5,
         pin: true,
+        markers: true,
       },
     });
 
-    tl.from(".card1", { yPercent: 20, x: window.innerWidth, rotation: 45 })
-      .from(".card2", { yPercent: -20, x: -window.innerWidth, rotation: -40 })
-      .from(".card3", { yPercent: 30, x: -window.innerWidth, rotation: 60 })
-      .from(".card4", { yPercent: -30, x: window.innerWidth, rotation: -50 })
-      .from(".card5", { yPercent: 40, x: window.innerWidth, rotation: 70 });
+    tl.from(".card1", {
+      yPercent: 20,
+      x: window.innerWidth,
+      rotation: 45,
+      // Add explicit duration
+    })
+      .from(".card2", {
+        yPercent: -20,
+        x: -window.innerWidth,
+        rotation: -40,
+      }) // Overlap timing to control pacing
+      .from(".card3", {
+        yPercent: 30,
+        x: -window.innerWidth,
+        rotation: 60,
+      })
+
+      .from(".card4", {
+        yPercent: -30,
+        x: window.innerWidth,
+        rotation: -50,
+      })
+      .from(".card5", {
+        yPercent: 40,
+        x: window.innerWidth,
+        rotation: 70,
+      });
   });
   const rotations = [
     "rotate(-8deg)",
@@ -36,13 +59,13 @@ const Win: React.FC = () => {
   return (
     <div
       id="Win"
-      className="win relative z-50 min-h-[100vh] w-full  pt-20 font-arabic "
+      className="win relative z-50  min-h-[100dvh] w-full  pt-20 font-arabic "
     >
       <div className="w-full h-full sticky top-0">
-        <h1 className="overflow-clip  text-center font-black text-4xl  text-yellow  py-6">
+        <h1 className="overflow-clip  text-center font-black text-2xl md:text-4xl  text-yellow  py-6">
           وش راح نربح من هذي الدورة
         </h1>
-        <div className=" w-full h-full relative  flex justify-center items-center ">
+        <div className=" w-full h-[100vh]  relative  flex justify-center items-start pt-[30vh] ">
           {cards.map((_, i) => (
             <SpotlightCard
               key={i}

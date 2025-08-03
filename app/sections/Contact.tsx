@@ -31,14 +31,14 @@ const Contact = () => {
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto">
+    <div id="Contact" className="w-full  max-w-6xl mx-auto">
       {/* Header Section */}
 
-      <div className="flex flex-col lg:flex-row gap-8">
+      <div className="flex flex-col lg:flex-row  gap-8">
         {/* Features Section */}
 
         {/* Contact Form */}
-        <div className="w-full lg:w-1/2">
+        <div className="w-full lg:w-1/2  mx-auto">
           <div className="bg-black/60 rounded-xl border border-yellow-400/50 p-6 shadow-xl">
             <h2 className="text-2xl font-bold text-yellow mb-6 text-center">
               سجل في الدورة الآن
