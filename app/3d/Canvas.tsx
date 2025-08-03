@@ -28,7 +28,7 @@ type RotationTuple = [number, number, number];
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-export function Scene(): JSX.Element {
+export function Scene(): React.JSX.Element {
   const [boxSize, setBoxSize] = useState<number>(1);
   const [rotation, setRotation] = useState<RotationTuple>([0, 0, 0]);
   const [isMobileDevice, setIsMobileDevice] = useState<boolean>(false);
@@ -93,10 +93,10 @@ export function Scene(): JSX.Element {
       ease: "power2.inOut",
       yoyo: true,
       repeat: -1,
-      onStart: () => {
+      onStart: (): void => {
         // Will-change is already set above for the entire animation sequence
       },
-      onUpdate: () => setBoxSize(scaleProxy.value),
+      onUpdate: (): void => setBoxSize(scaleProxy.value),
     });
 
     // Create a timeline for better control
@@ -107,16 +107,16 @@ export function Scene(): JSX.Element {
         end: "bottom top",
         scrub: 1,
         refreshPriority: -1,
-        onStart: () => {
-          // Ensure will-change is set when scroll animation starts
-          if (containerRef.current) {
-            setWillChange(containerRef.current, "transform, opacity");
-          }
-        },
-        onComplete: () => {
-          // Remove will-change when this scroll section is complete
-          // Note: We'll keep it since other animations might still be running
-        },
+      },
+      onComplete: (): void => {
+        // Remove will-change when this scroll section is complete
+        // Note: We'll keep it since other animations might still be running
+      },
+      onStart: (): void => {
+        // Ensure will-change is set when scroll animation starts
+        if (containerRef.current) {
+          setWillChange(containerRef.current, "transform, opacity");
+        }
       },
     });
 
@@ -130,7 +130,7 @@ export function Scene(): JSX.Element {
       y: 7,
       z: 0,
       ease: "power2.out",
-      onUpdate: () => {
+      onUpdate: (): void => {
         if (containerRef.current) {
           gsap.set(containerRef.current, {
             opacity: positionProxy.opacity,
@@ -154,7 +154,7 @@ export function Scene(): JSX.Element {
         y: -1,
         z: 0,
         ease: "power2.inOut",
-        onUpdate: () => {
+        onUpdate: (): void => {
           if (containerRef.current) {
             gsap.set(containerRef.current, {
               opacity: positionProxy.opacity,
@@ -179,7 +179,7 @@ export function Scene(): JSX.Element {
         y: -6.1,
         z: 0,
         ease: "power2.inOut",
-        onUpdate: () => {
+        onUpdate: (): void => {
           if (containerRef.current) {
             gsap.set(containerRef.current, {
               opacity: positionProxy.opacity,
@@ -203,12 +203,12 @@ export function Scene(): JSX.Element {
         end: "120% center",
         scrub: 1,
         refreshPriority: -1,
-        onStart: () => {
-          // Ensure will-change is still active for this section
-          if (containerRef.current) {
-            setWillChange(containerRef.current, "transform, opacity");
-          }
-        },
+      },
+      onStart: (): void => {
+        // Ensure will-change is still active for this section
+        if (containerRef.current) {
+          setWillChange(containerRef.current, "transform, opacity");
+        }
       },
     });
 
@@ -221,7 +221,7 @@ export function Scene(): JSX.Element {
       y: -1,
       z: 0,
       ease: "power2.inOut",
-      onUpdate: () => {
+      onUpdate: (): void => {
         if (containerRef.current) {
           gsap.set(containerRef.current, {
             opacity: positionProxy.opacity,
@@ -244,12 +244,12 @@ export function Scene(): JSX.Element {
         end: "90% bottom",
         scrub: 1.2,
         refreshPriority: -1,
-        onStart: () => {
-          // Ensure will-change is still active for this section
-          if (containerRef.current) {
-            setWillChange(containerRef.current, "transform, opacity");
-          }
-        },
+      },
+      onStart: (): void => {
+        // Ensure will-change is still active for this section
+        if (containerRef.current) {
+          setWillChange(containerRef.current, "transform, opacity");
+        }
       },
     });
 
@@ -261,7 +261,7 @@ export function Scene(): JSX.Element {
       y: 6,
       z: 0,
       ease: "power2.inOut",
-      onUpdate: () => {
+      onUpdate: (): void => {
         if (containerRef.current) {
           gsap.set(containerRef.current, {
             opacity: positionProxy.opacity,
