@@ -50,7 +50,7 @@ const Program: React.FC = () => {
   );
 
   return (
-    <section className="bg-black text-white font-arabic min-h-screen py-8 sm:py-12 px-3 sm:px-4 md:px-8">
+    <section className=" relative z-50 text-white font-arabic min-h-screen py-8 sm:py-12 px-3 sm:px-4 md:px-8">
       {/* Header */}
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-8 sm:mb-12">

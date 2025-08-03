@@ -1,7 +1,6 @@
 // src/components/ContactForm.js
 "use client";
 import React, { useState } from "react";
-import { Brain, Bot, Network, Projector, LineChart, Check } from "lucide-react";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -30,33 +29,6 @@ const Contact = () => {
     // Hide success message after 5 seconds
     setTimeout(() => setIsSubmitted(false), 5000);
   };
-  const features = [
-    {
-      icon: <Brain className="text-yellow w-6 h-6" />,
-      title: "مقدمة في الذكاء الاصطناعي",
-      description: "فهم المفاهيم الأساسية والتطور التاريخي للذكاء الاصطناعي",
-    },
-    {
-      icon: <Bot className="text-yellow w-6 h-6" />,
-      title: "تعلم الآلة",
-      description: "دراسة خوارزميات التعلم الآلي وتطبيقاتها العملية",
-    },
-    {
-      icon: <Network className="text-yellow w-6 h-6" />,
-      title: "الشبكات العصبية",
-      description: "تصميم وتدريب الشبكات العصبية العميقة",
-    },
-    {
-      icon: <Projector className="text-yellow w-6 h-6" />,
-      title: "معالجة اللغة الطبيعية",
-      description: "تطبيقات الذكاء الاصطناعي في فهم اللغات البشرية",
-    },
-    {
-      icon: <LineChart className="text-yellow w-6 h-6" />,
-      title: "تحليل البيانات",
-      description: "استخدام الذكاء الاصطناعي لاستخلاص الرؤى من البيانات",
-    },
-  ];
 
   return (
     <div className="w-full max-w-6xl mx-auto">

@@ -7,10 +7,11 @@ import FeaturesSectionDemo from "@/components/features-section-demo-3";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-const Who = () => {
-  const containerRef = useRef();
-  const titleRef = useRef();
-  const paragraphRef = useRef();
+const Who: React.FC = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const paragraphRef = useRef<HTMLParagraphElement>(null);
+
   useGSAP(() => {
     // Background animation (your existing one)
     gsap.to(".bgblurmewa", {
@@ -24,108 +25,123 @@ const Who = () => {
     });
 
     // Title animation - entire title appears with dramatic effect
-    gsap.fromTo(
-      titleRef.current,
-      {
-        opacity: 0,
-        y: 100,
-        rotationX: -90,
-        scale: 0.5,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        rotationX: 0,
-        scale: 1,
-        duration: 1.2,
-        ease: "back.out(1.7)",
-        scrollTrigger: {
-          trigger: titleRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse",
+    if (titleRef.current) {
+      gsap.fromTo(
+        titleRef.current,
+        {
+          opacity: 0,
+          y: 100,
+          rotationX: -90,
+          scale: 0.5,
         },
-      }
-    );
+        {
+          opacity: 1,
+          y: 0,
+          rotationX: 0,
+          scale: 1,
+          duration: 1.2,
+          ease: "back.out(1.7)",
+          scrollTrigger: {
+            trigger: titleRef.current,
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
 
-    // Continuous glow pulse for title
-    gsap.to(titleRef.current, {
-      textShadow:
-        "0 0 20px rgba(234,179,8,0.8), 0 0 40px rgba(234,179,8,0.6), 0 0 60px rgba(234,179,8,0.4)",
-      duration: 2,
-      yoyo: true,
-      repeat: -1,
-      ease: "power2.inOut",
-    });
+      // Continuous glow pulse for title
+      gsap.to(titleRef.current, {
+        textShadow:
+          "0 0 20px rgba(234,179,8,0.8), 0 0 40px rgba(234,179,8,0.6), 0 0 60px rgba(234,179,8,0.4)",
+        duration: 2,
+        yoyo: true,
+        repeat: -1,
+        ease: "power2.inOut",
+      });
+    }
 
     // Container slide up animation
-    gsap.fromTo(
-      containerRef.current,
-      {
-        y: 100,
-        opacity: 0,
-        scale: 0.9,
-      },
-      {
-        y: 0,
-        opacity: 1,
-        scale: 1,
-        duration: 1.2,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 85%",
-          end: "bottom 15%",
-          toggleActions: "play none none reverse",
+    if (containerRef.current) {
+      gsap.fromTo(
+        containerRef.current,
+        {
+          y: 100,
+          opacity: 0,
+          scale: 0.9,
         },
-      }
-    );
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 1.2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 85%",
+            end: "bottom 15%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+
+      // Floating animation for the container
+      gsap.to(containerRef.current, {
+        y: -10,
+        duration: 3,
+        yoyo: true,
+        repeat: 2,
+        ease: "power2.inOut",
+      });
+    }
 
     // Paragraph text reveal animation - word by word
-    const words = paragraphRef.current.querySelectorAll(".word");
-    gsap.fromTo(
-      words,
-      {
-        opacity: 0,
-        y: 30,
-        rotationY: 45,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        rotationY: 0,
-        duration: 0.6,
-        stagger: 0.05,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: paragraphRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse",
+    if (paragraphRef.current) {
+      const words = paragraphRef.current.querySelectorAll(".word");
+      gsap.fromTo(
+        words,
+        {
+          opacity: 0,
+          y: 30,
+          rotationY: 45,
         },
-      }
-    );
+        {
+          opacity: 1,
+          y: 0,
+          rotationY: 0,
+          duration: 0.6,
+          stagger: 0.05,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: paragraphRef.current,
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
 
-    // Highlight tech words with special animation
-    const techWords = paragraphRef.current.querySelectorAll(".tech-word");
-    gsap.fromTo(
-      techWords,
-      {
-        backgroundSize: "0% 100%",
-      },
-      {
-        backgroundSize: "100% 100%",
-        duration: 0.8,
-        stagger: 0.2,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: paragraphRef.current,
-          start: "top 70%",
-          end: "bottom 30%",
-          toggleActions: "play none none reverse",
+      // Highlight tech words with special animation
+      const techWords = paragraphRef.current.querySelectorAll(".tech-word");
+      gsap.fromTo(
+        techWords,
+        {
+          backgroundSize: "0% 100%",
         },
-      }
-    );
+        {
+          backgroundSize: "100% 100%",
+          duration: 0.8,
+          stagger: 0.2,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: paragraphRef.current,
+            start: "top 70%",
+            end: "bottom 30%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+    }
 
     // Divider line animation
     gsap.fromTo(
@@ -147,20 +163,11 @@ const Who = () => {
         },
       }
     );
-
-    // Floating animation for the container
-    gsap.to(containerRef.current, {
-      y: -10,
-      duration: 3,
-      yoyo: true,
-      repeat: 2,
-      ease: "power2.inOut",
-    });
   }, []);
 
   // Function to split Arabic text into words for title
-  const splitArabicIntoWords = (text) => {
-    return text.split(" ").map((word, index) => (
+  const splitArabicIntoWords = (text: string): React.ReactNode[] => {
+    return text.split(" ").map((word: string, index: number) => (
       <span key={index} className="word-title inline-block mx-1">
         {word}
       </span>
@@ -168,12 +175,22 @@ const Who = () => {
   };
 
   // Function to split text into words for paragraph
-  const splitTextIntoWords = (text) => {
-    return text.split(" ").map((word, index) => {
+  const splitTextIntoWords = (text: string): React.ReactNode[] => {
+    return text.split(" ").map((word: string, index: number) => {
       // Check if word contains tech terms
-      const isTechWord = ["React.js", "Next.js"].some((tech) =>
+      const isTechWord = ["React.js", "Next.js"].some((tech: string) =>
         word.includes(tech)
       );
+
+      const techWordStyle: React.CSSProperties = isTechWord
+        ? {
+            backgroundImage:
+              "linear-gradient(120deg, rgba(234,179,8,0.3) 0%, rgba(234,179,8,0.6) 100%)",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "left bottom",
+            backgroundSize: "0% 100%",
+          }
+        : {};
 
       return (
         <span
@@ -183,17 +200,7 @@ const Who = () => {
               ? "tech-word bg-gradient-to-r from-yellow/20 to-yellow/40 bg-no-repeat bg-left-bottom px-1 rounded"
               : ""
           }`}
-          style={
-            isTechWord
-              ? {
-                  backgroundImage:
-                    "linear-gradient(120deg, rgba(234,179,8,0.3) 0%, rgba(234,179,8,0.6) 100%)",
-                  backgroundRepeat: "no-repeat",
-                  backgroundPosition: "left bottom",
-                  backgroundSize: "0% 100%",
-                }
-              : {}
-          }
+          style={techWordStyle}
         >
           {word}
         </span>
@@ -202,7 +209,7 @@ const Who = () => {
   };
 
   return (
-    <section id="Who" className="relative   w-full font-arabic z-60 mt-[120vh]">
+    <section id="Who" className="relative w-full font-arabic z-60 mt-[120vh]">
       {/* Animated Background Element */}
       <div className="absolute bgblurmewa -top-50 left-1/2 -translate-x-1/2 -z-40 h-[90vh] w-[100vw] blur-[100px]">
         <div
