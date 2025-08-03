@@ -11,7 +11,6 @@ const Who = () => {
   const containerRef = useRef();
   const titleRef = useRef();
   const paragraphRef = useRef();
-
   useGSAP(() => {
     // Background animation (your existing one)
     gsap.to(".bgblurmewa", {
@@ -21,7 +20,6 @@ const Who = () => {
         start: "10% center",
         end: "40% center",
         scrub: 1,
-        markers: true,
       },
     });
 
@@ -204,10 +202,7 @@ const Who = () => {
   };
 
   return (
-    <section
-      id="Who"
-      className="relative overflow-hidden bg-black w-full font-arabic z-60 mt-[120vh]"
-    >
+    <section id="Who" className="relative   w-full font-arabic z-60 mt-[120vh]">
       {/* Animated Background Element */}
       <div className="absolute bgblurmewa -top-50 left-1/2 -translate-x-1/2 -z-40 h-[90vh] w-[100vw] blur-[100px]">
         <div

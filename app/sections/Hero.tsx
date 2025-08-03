@@ -1,8 +1,6 @@
 "use client";
-import DotGrid from "../DotGrid/DotGrid";
 import { Spotlight } from "@/components/ui/spotlight";
 import ShinyText from "../ShinyText/ShinyText";
-import { ArrowDown } from "lucide-react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from "gsap/SplitText";
@@ -136,7 +134,7 @@ const Hero = () => {
   });
 
   return (
-    <section id="Hero" className="fixed top-0 h-[120vh] w-[100vw] ">
+    <section id="Hero" className="fixed  top-0 h-[120vh] w-[100vw] ">
       <div className="bg-black/50 absolute inset-0 z-50 w-full h-full black-overlay" />
 
       {/* Main text overlay - responsive positioning and sizing */}
@@ -186,17 +184,8 @@ const Hero = () => {
               البرنامج بالاك تفيدكم انتما تاني
             </p>
           </div>
-
+          <div className=" h-[20vh]  w-full" />
           {/* Bottom section - responsive spacing and sizes */}
-          <div className="w-full h-[15%] sm:h-[20%] flex flex-col items-center justify-evenly gap-3 sm:gap-4 pb-4 sm:pb-6 lg:pb-8">
-            {/* Button text - responsive sizing */}
-            <h2 className="overflow-clip para font-arabic font-black text-lg sm:text-xl lg:text-2xl text-white border-2 border-yellow rounded-xl sm:rounded-2xl px-6 sm:px-8 lg:px-10 py-2 lg:py-2">
-              اضرب تقرعيجة
-            </h2>
-
-            {/* Arrow - responsive size */}
-            <ArrowDown className="size-12 sm:size-14 lg:size-15 rounded-full p-2 sm:p-3 lg:p-2 animate-bounce text-white bg-yellow shadow-lg shadow-yellow/80" />
-          </div>
         </div>
       </section>
     </section>
