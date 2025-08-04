@@ -255,8 +255,8 @@ export function Scene(): React.JSX.Element {
 
     lastTimeline.to([positionProxy, rotationProxy], {
       opacity: 1,
-      xPercent: -40,
-      yPercent: 10,
+      xPercent: isMobileDevice ? -40 : -20,
+      yPercent: isMobileDevice ? -10 : -10,
       x: 0,
       y: 7,
       z: 0,
