@@ -59,7 +59,7 @@ const Win: React.FC = () => {
   return (
     <div
       id="Win"
-      className="win relative z-50  min-h-[100dvh] w-full  pt-20 font-arabic "
+      className="win relative z-50  min-h-[100dvh] w-full  lg:pt-20 font-arabic "
     >
       <div className="w-full h-full sticky top-0">
         <h1 className="overflow-clip  text-center font-black text-2xl md:text-4xl  text-yellow  py-6">

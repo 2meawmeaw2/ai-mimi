@@ -330,7 +330,7 @@ export function Scene(): React.JSX.Element {
         <group scale={0.03} rotation={[rotation[0], rotation[1], rotation[2]]}>
           <ambientLight intensity={0.4} />
           <directionalLight position={[5, 5, 5]} intensity={1} />
-          <Environment preset="park" />
+          <Environment preset="sunset" />
           <Float
             speed={isMobileDevice ? 1 : 2} // Reduce float speed on mobile
             rotationIntensity={isMobileDevice ? 1 : 2} // Reduce rotation intensity on mobile
