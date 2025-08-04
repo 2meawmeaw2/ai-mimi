@@ -255,10 +255,10 @@ export function Scene(): React.JSX.Element {
 
     lastTimeline.to([positionProxy, rotationProxy], {
       opacity: 1,
-      xPercent: 0,
+      xPercent: -40,
       yPercent: 10,
       x: 0,
-      y: 6,
+      y: 7,
       z: 0,
       ease: "power2.inOut",
       onUpdate: (): void => {

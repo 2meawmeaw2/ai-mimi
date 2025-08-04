@@ -220,7 +220,7 @@ const Who: React.FC = () => {
 
       <div
         ref={containerRef}
-        className="w-[90%] max-w-4xl mt-10 py-10 mx-auto my-10 rounded-xl border border-yellow/50 flex flex-col items-center justify-center shadow-lg shadow-yellow/20 gap-6 backdrop-blur-sm bg-gradient-to-b from-black/80 to-black"
+        className="w-[90%] max-w-4xl mt-10 py-10 mx-auto my-10 rounded-xl border border-yellow/50 flex flex-col items-center justify-center shadow-lg shadow-yellow/20 gap-6 backdrop-blur-sm bg-gradient-to-b from-black/80 to-black/1"
       >
         <h1
           ref={titleRef}
