@@ -144,7 +144,7 @@ export function Scene(): React.JSX.Element {
           {
             xPercent: -30,
             x: Math.PI,
-            y: -Math.PI * 5,
+            y: -Math.PI * 1,
             z: Math.PI * 2,
             opacity: 1,
           },
@@ -237,10 +237,10 @@ export function Scene(): React.JSX.Element {
             <directionalLight position={[5, 5, 5]} intensity={1} />
             <Environment preset="sunset" />
             <Float
-              speed={isMobileDevice ? 1 : 2}
-              rotationIntensity={1}
-              floatIntensity={1}
-              floatingRange={[-2, 2]}
+              speed={isMobileDevice ? 0 : 2}
+              rotationIntensity={isMobileDevice ? 0 : 1}
+              floatIntensity={isMobileDevice ? 0 : 1}
+              floatingRange={isMobileDevice ? [0, 0] : [-2, 2]}
             >
               <Suspense>
                 <Robot boxSize={boxSize} />

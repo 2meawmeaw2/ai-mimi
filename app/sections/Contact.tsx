@@ -61,6 +61,22 @@ const Contact = () => {
             <h2 className="text-2xl font-bold text-yellow mb-6 text-center">
               سجل في الدورة الآن
             </h2>
+            <div className="max-w-sm mx-auto pb-6 rounded-xl shadow-lg">
+              <h2 className="text-xl font-bold text-center mb-4">
+                السعر : 9000 دج
+              </h2>
+              <ul className="space-y-2 text-center">
+                <li>
+                  <span className="font-medium">Ccp :</span> Magaz Ikram
+                  <span className="font-medium mx-1">| 0028178372 |</span>
+                  <span className="font-medium">Clé :</span> 08
+                </li>
+                <li>
+                  <span className="font-medium">RIP :</span>{" "}
+                  00799999002817837208
+                </li>
+              </ul>
+            </div>
             {isSubmitted && (
               <div className="mb-6 p-4  bg-green-900/30 border border-green-500 rounded-lg text-green-300 flex justify-end items-center gap-2">
                 <svg

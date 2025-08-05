@@ -91,7 +91,7 @@ const Feature = ({
       {" "}
       <div
         className={cn(
-          "flex flex-col lg:border-r py-10 relative group/feature border-white/30",
+          "flex flex-col  lg:border-r lg:py-10 relative group/feature border-white/30",
           (index === 0 || index === 4) && "lg:border-l border-white/30",
           index < 4 && "lg:border-b border-white/30"
         )}
