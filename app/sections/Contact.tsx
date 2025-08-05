@@ -1,4 +1,3 @@
-// src/components/ContactForm.js
 "use client";
 import React, { useState } from "react";
 
@@ -10,6 +9,7 @@ const Contact = () => {
     message: "",
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -21,13 +21,12 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitted(false);
+    setLoading(true);
 
     try {
       const response = await fetch("/api/email", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
@@ -45,18 +44,15 @@ const Contact = () => {
       }
     } catch (error) {
       console.error("Error submitting form:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div id="Contact" className="w-full  max-w-6xl mx-auto">
-      {/* Header Section */}
-
-      <div className="flex flex-col lg:flex-row  gap-8">
-        {/* Features Section */}
-
-        {/* Contact Form */}
-        <div className="w-full lg:w-1/2  mx-auto">
+    <div id="Contact" className="w-full max-w-6xl mx-auto">
+      <div className="flex flex-col lg:flex-row gap-8">
+        <div className="w-full lg:w-1/2 mx-auto">
           <div className="bg-black/60 rounded-xl border border-yellow-400/50 p-6 shadow-xl">
             <h2 className="text-2xl font-bold text-yellow mb-6 text-center">
               سجل في الدورة الآن
@@ -77,8 +73,9 @@ const Contact = () => {
                 </li>
               </ul>
             </div>
+
             {isSubmitted && (
-              <div className="mb-6 p-4  bg-green-900/30 border border-green-500 rounded-lg text-green-300 flex justify-end items-center gap-2">
+              <div className="mb-6 p-4 bg-green-900/30 border border-green-500 rounded-lg text-green-300 flex justify-end items-center gap-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6"
@@ -160,14 +157,17 @@ const Contact = () => {
 
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 text-black text-lg font-bold py-3 rounded-lg hover:from-yellow hover:to-yellow-500 transition-all duration-300 transform hover:-translate-y-1 shadow-lg shadow-yellow-500/20"
+                disabled={loading}
+                className={`w-full text-black text-lg font-bold py-3 rounded-lg transition-all duration-300 transform shadow-lg ${
+                  loading
+                    ? "bg-yellow-400 cursor-not-allowed"
+                    : "bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow hover:to-yellow-500 hover:-translate-y-1"
+                }`}
               >
-                إرسال التسجيل
+                {loading ? "جاري الإرسال..." : "إرسال التسجيل"}
               </button>
             </form>
           </div>
-
-          {/* Footer */}
         </div>
       </div>
     </div>
