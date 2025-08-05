@@ -8,35 +8,65 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import Loader from "./Loading";
 
+interface PositionProxy {
+  opacity: number;
+  xPercent: number;
+  yPercent: number;
+}
+
+interface RotationProxy {
+  x: number;
+  y: number;
+  z: number;
+}
+
+interface ScaleProxy {
+  value: number;
+}
+
+type RotationTuple = [number, number, number];
+
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export function Scene(): React.JSX.Element {
-  const containerRef = useRef<HTMLDivElement>(null);
   const [boxSize, setBoxSize] = useState<number>(1);
-  const [rotation, setRotation] = useState<[number, number, number]>([0, 0, 0]);
-  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [rotation, setRotation] = useState<RotationTuple>([0, 0, 0]);
+  const [isMobileDevice, setIsMobileDevice] = useState<boolean>(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  // Detect mobile viewport
   useEffect(() => {
-    const updateMobile = (): void => setIsMobile(window.innerWidth <= 768);
-    updateMobile();
-    window.addEventListener("resize", updateMobile);
-    return () => window.removeEventListener("resize", updateMobile);
+    const checkMobile = (): boolean =>
+      window.innerWidth <= 768 ||
+      /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      );
+
+    const handleResize = (): void => setIsMobileDevice(checkMobile());
+
+    setIsMobileDevice(checkMobile());
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Helper to optimize mobile performance
-  const setWill = (el: HTMLElement | null, prop: string): void => {
-    if (el && isMobile) el.style.willChange = prop;
-  };
-  const removeWill = (el: HTMLElement | null): void => {
-    if (el && isMobile) el.style.willChange = "auto";
+  const setWillChange = (
+    element: HTMLElement | null,
+    properties: string
+  ): void => {
+    if (element && isMobileDevice) element.style.willChange = properties;
   };
 
-  // GSAP scroll-trigger animations
+  const removeWillChange = (element: HTMLElement | null): void => {
+    if (element && isMobileDevice) element.style.willChange = "auto";
+  };
+
   useGSAP(() => {
-    const scaleProxy = { value: 1 };
-    const rotationProxy = { x: 0, y: 0, z: 0 };
-    const positionProxy = { opacity: 1, xPercent: 0, yPercent: 0 };
+    const scaleProxy: ScaleProxy = { value: 1 };
+    const rotationProxy: RotationProxy = { x: 0, y: 0, z: 0 };
+    const positionProxy: PositionProxy = {
+      opacity: 1,
+      xPercent: 0,
+      yPercent: 0,
+    };
 
     const applyProps = (): void => {
       if (containerRef.current) {
@@ -86,7 +116,7 @@ export function Scene(): React.JSX.Element {
             x: 0,
             y: Math.PI * 2 + Math.PI / 4,
             z: 0,
-            opacity: isMobile ? 0.4 : 1,
+            opacity: isMobileDevice ? 0.4 : 1,
           },
           {
             xPercent: 40,
@@ -126,11 +156,11 @@ export function Scene(): React.JSX.Element {
         end: "60% center",
         steps: [
           {
-            xPercent: -35,
-            yPercent: isMobile ? 0 : -10,
-            x: Math.PI / 2,
-            y: -Math.PI * 5.2,
-            z: Math.PI * 1.85,
+            xPercent: -35, // smooth continuation
+            yPercent: isMobileDevice ? 0 : -10, // slight vertical motion
+            x: Math.PI / 2, // 90° — laying on back
+            y: -Math.PI * 5.2, // turn head the opposite way
+            z: Math.PI * 1.85, // reverse head tilt
             opacity: 1,
           },
         ],
@@ -146,75 +176,77 @@ export function Scene(): React.JSX.Element {
           scrub: 1,
           refreshPriority: -1,
         },
-        onStart: () => setWill(containerRef.current, "transform, opacity"),
+        onStart: () =>
+          setWillChange(containerRef.current, "transform, opacity"),
       });
-      section.steps.forEach((step) => {
+
+      for (const step of section.steps) {
         tl.to([positionProxy, rotationProxy], {
           ...step,
           duration: 1.5,
           ease: "power2.inOut",
           onUpdate: applyProps,
         });
-      });
+      }
     }
 
     gsap.to(scaleProxy, {
       value: 1.1,
-      duration: isMobile ? 3 : 2,
+      duration: 2,
       ease: "power2.inOut",
       yoyo: true,
       repeat: -1,
       onUpdate: () => setBoxSize(scaleProxy.value),
     });
-    return () => {
-      removeWill(containerRef.current);
-      ScrollTrigger.getAll().forEach((t) => t.kill());
-    };
-  }, [isMobile]);
 
-  // Respect reduced motion preferences
+    return () => {
+      removeWillChange(containerRef.current);
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, [isMobileDevice]);
+
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const reduced = window.matchMedia(
+      const reducedMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)"
       ).matches;
-      if (reduced) gsap.globalTimeline.timeScale(0.1);
+      if (reducedMotion) gsap.globalTimeline.timeScale(0.1);
     }
   }, []);
-
   return (
     <>
+      {" "}
       <div
         ref={containerRef}
-        className="fixed bottom-0 z-60 w-full pointer-events-none h-[40vh] sm:h-[50vh] md:h-[60vh] lg:h-[70vh]"
-        style={{ willChange: isMobile ? "transform, opacity" : "auto" }}
+        className="fixed bottom-0 z-60 h-[50vh] w-full pointer-events-none"
+        style={{ willChange: isMobileDevice ? "transform, opacity" : "auto" }}
       >
         <Canvas
-          frameloop={isMobile ? "demand" : undefined}
-          shadows={!isMobile}
-          camera={{ fov: 75, position: [0, 0, 5] }}
-          performance={{ min: 0.1, max: isMobile ? 0.7 : 1, debounce: 100 }}
-          dpr={[1, isMobile ? 1 : 2]}
-          gl={{
-            preserveDrawingBuffer: true,
-            powerPreference: isMobile ? "low-power" : "high-performance",
-          }}
+          camera={{ fov: 75 }}
+          performance={{ min: 0.1, max: 1, debounce: 200 }}
+          dpr={
+            typeof window !== "undefined"
+              ? Math.min(window.devicePixelRatio, isMobileDevice ? 2 : 3)
+              : 1
+          }
+          gl={{ preserveDrawingBuffer: true }}
           style={{ pointerEvents: "none" }}
         >
-          <ambientLight intensity={isMobile ? 0.3 : 0.5} />
-          {!isMobile && <Environment preset="sunset" />}
-          <Float
-            speed={isMobile ? 0.5 : 1}
-            rotationIntensity={0.5}
-            floatIntensity={isMobile ? 0.5 : 1}
-            floatingRange={[-1, 1]}
-          >
-            <Suspense fallback={null}>
-              <group scale={boxSize} rotation={rotation}>
+          <group scale={0.03} rotation={rotation}>
+            <ambientLight intensity={0.4} />
+            <directionalLight position={[5, 5, 5]} intensity={1} />
+            <Environment preset="sunset" />
+            <Float
+              speed={isMobileDevice ? 1 : 2}
+              rotationIntensity={1}
+              floatIntensity={1}
+              floatingRange={[-2, 2]}
+            >
+              <Suspense>
                 <Robot boxSize={boxSize} />
-              </group>
-            </Suspense>
-          </Float>
+              </Suspense>
+            </Float>
+          </group>
         </Canvas>
       </div>
       <Loader />
