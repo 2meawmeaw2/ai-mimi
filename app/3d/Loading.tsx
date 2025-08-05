@@ -46,7 +46,7 @@ const Loader = () => {
       <p className="text-sm font-mono tracking-wide">{Math.floor(progress)}%</p>
       {showWarning && (
         <p className="text-xs text-red-500 mt-2 font-mono">
-          اذا طولت المشكل في الانترنت تاعك مشي فينا
+          :D اذا طولت المشكل في الانترنت تاعك مشي فينا
         </p>
       )}
     </div>
