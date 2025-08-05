@@ -216,6 +216,7 @@ export function Scene(): React.JSX.Element {
         opacity: 0.4,
         xPercent: -40,
         yPercent: 10,
+        duration: 1.25,
         x: 0,
         y: Math.PI * 2 + Math.PI / 4,
         z: 0,
@@ -239,6 +240,7 @@ export function Scene(): React.JSX.Element {
         opacity: 1,
         xPercent: 40,
         yPercent: -40,
+        duration: 2,
         x: Math.PI * 2,
         y: Math.PI * 2 + -Math.PI / 4,
         z: Math.PI,
@@ -261,6 +263,8 @@ export function Scene(): React.JSX.Element {
       .to([positionProxy, rotationProxy], {
         xPercent: -40,
         yPercent: -40,
+        opacity: 0.7,
+        duration: 2,
         x: 0,
         y: Math.PI * 2 + +Math.PI / 3.4,
         z: Math.PI * 2 + Math.PI / 6,
@@ -284,9 +288,10 @@ export function Scene(): React.JSX.Element {
     const winTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: "#Win",
-        start: "center center",
-        end: "120% center",
+        start: "top center",
+        end: "90% center",
         scrub: 1,
+        markers: true,
         refreshPriority: -1,
       },
       onStart: (): void => {
@@ -297,36 +302,83 @@ export function Scene(): React.JSX.Element {
       },
     });
 
-    winTimeline.to([positionProxy, rotationProxy], {
-      duration: 1,
-      opacity: 1,
-      xPercent: 40,
-      yPercent: 0,
-      x: 0,
-      y: -0.25 * Math.PI,
-      z: 0,
-      ease: "power2.inOut",
-      onUpdate: (): void => {
-        if (containerRef.current) {
-          gsap.set(containerRef.current, {
-            opacity: positionProxy.opacity,
-            xPercent: positionProxy.xPercent,
-            yPercent: positionProxy.yPercent,
-          });
-        }
-        setRotation([
-          rotationProxy.x,
-          rotationProxy.y,
-          rotationProxy.z,
-        ] as RotationTuple);
-      },
-    });
+    winTimeline
+      .to([positionProxy, rotationProxy], {
+        xPercent: -20,
+        opacity: 0.6,
+        duration: 1.5,
+        x: Math.PI,
+        y: Math.PI * 2,
+        z: Math.PI * 2,
+        ease: "power2.inOut",
+        onUpdate: (): void => {
+          if (containerRef.current) {
+            gsap.set(containerRef.current, {
+              opacity: positionProxy.opacity,
+
+              xPercent: positionProxy.xPercent,
+              yPercent: positionProxy.yPercent,
+            });
+          }
+          setRotation([
+            rotationProxy.x,
+            rotationProxy.y,
+            rotationProxy.z,
+          ] as RotationTuple);
+        },
+      })
+      .to(
+        containerRef.current,
+        {
+          scale: 0.7,
+
+          duration: 1.5,
+
+          ease: "power2.inOut",
+        },
+        "<"
+      )
+      .to([positionProxy, rotationProxy], {
+        opacity: 1,
+        duration: 1,
+        xPercent: -30,
+        x: Math.PI,
+        y: Math.PI,
+        z: Math.PI * 2,
+        ease: "power2.inOut",
+        onUpdate: (): void => {
+          if (containerRef.current) {
+            gsap.set(containerRef.current, {
+              opacity: positionProxy.opacity,
+              xPercent: positionProxy.xPercent,
+              yPercent: positionProxy.yPercent,
+            });
+          }
+          setRotation([
+            rotationProxy.x,
+            rotationProxy.y,
+            rotationProxy.z,
+          ] as RotationTuple);
+        },
+      })
+      .to(
+        containerRef.current,
+        {
+          scale: 1,
+
+          duration: 1,
+
+          ease: "power2.inOut",
+        },
+        "<"
+      );
 
     const lastTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: "#Contact",
-        start: "top bottom",
+        start: "top center",
         end: "90% bottom",
+        markers: true,
         scrub: 1.2,
         refreshPriority: -1,
       },
@@ -339,12 +391,11 @@ export function Scene(): React.JSX.Element {
     });
 
     lastTimeline.to([positionProxy, rotationProxy], {
-      opacity: 1,
       xPercent: isMobileDevice ? -40 : -20,
-      yPercent: isMobileDevice ? -10 : -5,
-      x: 0,
-      y: 7,
-      z: 0,
+      yPercent: isMobileDevice ? -10 : -8,
+      x: Math.PI * 2,
+      y: Math.PI * 2 + Math.PI / 4,
+      z: Math.PI,
       ease: "power2.inOut",
       onUpdate: (): void => {
         if (containerRef.current) {

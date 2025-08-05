@@ -13,36 +13,37 @@ import {
 export default function Win() {
   const features = [
     {
-      title: "Built for developers",
-      description:
-        "Built for engineers, developers, dreamers, thinkers and doers.",
+      title: "مصمم للمطورين",
+      description: "مصمم للمهندسين والمطورين والحالمين والمفكرين والمنفذين.",
       icon: <IconTerminal2 />,
     },
     {
-      title: "Ease of use",
-      description:
-        "It's as easy as using an Apple, and as expensive as buying one.",
+      title: "سهل الاستخدام",
+      description: "سهل الاستخدام مثل أجهزة Apple، وغالي مثلها.",
       icon: <IconEaseInOut />,
     },
     {
-      title: "Pricing like no other",
-      description:
-        "Our prices are best in the market. No cap, no lock, no credit card required.",
+      title: "أسعار لا مثيل لها",
+      description: "أفضل الأسعار في السوق. بدون اشتراك، بدون بطاقة ائتمان.",
       icon: <IconCurrencyDollar />,
     },
     {
-      title: "100% Uptime guarantee",
-      description: "We just cannot be taken down by anyone.",
+      title: "ضمان تشغيل 100٪",
+      description: "لا أحد يستطيع إيقافنا.",
       icon: <IconCloud />,
     },
     {
-      title: "Multi-tenant Architecture",
-      description: "You can simply share passwords instead of buying new seats",
+      title: "هيكل متعدد المستخدمين",
+      description: "شارك كلمات المرور بدلًا من شراء عضويات جديدة.",
       icon: <IconRouteAltLeft />,
     },
   ];
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  relative z-10 py-10 max-w-7xl mx-auto">
+    <div
+      id="Win"
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 relative z-10 py-10 max-w-7xl mx-auto"
+      dir="rtl"
+    >
       {features.map((feature, index) => (
         <Feature key={feature.title} {...feature} index={index} />
       ))}
@@ -63,9 +64,8 @@ const Feature = ({
 }) => {
   return (
     <div
-      id="Win"
       className={cn(
-        "flex flex-col lg:border-r  py-10 relative group/feature dark:border-neutral-800",
+        "flex flex-col  lg:border-r py-10  relative group/feature dark:border-neutral-800",
         (index === 0 || index === 4) && "lg:border-l dark:border-neutral-800",
         index < 4 && "lg:border-b dark:border-neutral-800"
       )}
@@ -80,8 +80,8 @@ const Feature = ({
         {icon}
       </div>
       <div className="text-lg font-bold mb-2 relative z-10 px-10">
-        <div className="absolute left-0 inset-y-0 h-6 group-hover/feature:h-8 w-1 rounded-tr-full rounded-br-full bg-neutral-300 dark:bg-neutral-700 group-hover/feature:bg-blue-500 transition-all duration-200 origin-center" />
-        <span className="group-hover/feature:translate-x-2 transition duration-200 inline-block text-neutral-800 dark:text-neutral-100">
+        <div className="absolute right-0 inset-y-0 h-6 group-hover/feature:h-8 w-1 rounded-tl-full rounded-bl-full bg-neutral-300 dark:bg-neutral-700 group-hover/feature:bg-blue-500 transition-all duration-200 origin-center" />
+        <span className="group-hover/feature:-translate-x-2 transition duration-200 inline-block text-neutral-800 dark:text-neutral-100">
           {title}
         </span>
       </div>
