@@ -56,7 +56,7 @@ export async function POST(request: Request) {
 
     const { data, error } = await resend.emails.send({
       from: "AI course MIMI <onboarding@resend.dev>",
-      to: ["tahaslco@gmail.com"],
+      to: ["ikram.magaz1@gmail.com"],
       replyTo: formData.email,
       subject: "New Contact Form Submission",
       html: `
