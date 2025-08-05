@@ -226,18 +226,21 @@ const Who: React.FC = () => {
           ref={titleRef}
           className="text-4xl md:text-5xl font-bold text-yellow text-center drop-shadow-[0_2px_4px_rgba(234,179,8,0.5)] perspective-1000"
         >
-          {splitArabicIntoWords(":أنا شكون")}
+          من عندمن راح تتعلم ؟
         </h1>
 
         <div className="divider-line w-16 h-1 bg-yellow rounded-full origin-center"></div>
 
         <p
           ref={paragraphRef}
-          className="text-lg md:text-xl text-white/90 text-center w-[90%] max-w-2xl p-4 leading-relaxed"
+          className="text-sm  font-light md:text-xl text-white/90 text-center w-[90%] max-w-2xl p-4 leading-relaxed"
         >
-          {splitTextIntoWords(
-            `أنا محمد عبد الله، مطور واجهات مستخدم من المغرب. متخصص في إنشاء تطبيقات ويب تفاعلية باستخدام React.js و Next.js. لدي خبرة في بناء واجهات مستخدم جذابة وسلسة، مع التركيز على تجربة المستخدم والأداء العالي. أسعى دائمًا لتحويل الأفكار الإبداعية إلى واقع رقمي ملموس.`
-          )}
+          أنا إكرام، مهندسة معمارية، مصمّمة، وصانعة محتوى. جربت الذكاء الاصطناعي
+          في كل مجالات حياتي: من خدمتي كمصمّمة، لمشاريعي، لمحتواي، وحتى في حياتي
+          اليومية. وعلى مدار العامين اللي فاتوا، علّمت الأطفال، النساء، والشباب
+          كيفاش يستغلو الذكاء الاصطناعي بطريقتهم، وحسب احتياجهم. اليوم، جمعت كل
+          هاد التجربة في دورة واحدة، مبنية باش تكون بسيطة، تطبيقية، وفعالة… لأي
+          واحد حاب يخدم بذكاء.
         </p>
       </div>
     </section>

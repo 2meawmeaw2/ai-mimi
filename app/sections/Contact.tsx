@@ -133,7 +133,7 @@ const Contact = () => {
                 </label>
                 <textarea
                   name="message"
-                  placeholder="أدخل رسالتك أو استفسارك هنا"
+                  placeholder="اذا عندك استفسار ارسل هنا"
                   value={formData.message}
                   onChange={handleChange}
                   rows={4}
@@ -152,9 +152,6 @@ const Contact = () => {
           </div>
 
           {/* Footer */}
-          <div className="mt-8 text-center text-gray-400">
-            <p>© 2025 برنامج دورة الذكاء الاصطناعي. جميع الحقوق محفوظة.</p>
-          </div>
         </div>
       </div>
     </div>

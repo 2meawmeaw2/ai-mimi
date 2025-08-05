@@ -46,8 +46,8 @@ export default function Win() {
       dir="rtl"
     >
       {/* Title - Full width, centered */}
-      <h1 className="text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-yellow mb-10">
-        غير سجل راح تدي
+      <h1 className="text-right mr-7 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-yellow mb-10">
+        كي تسجل راح تدي :
       </h1>
 
       {/* Features Grid */}
@@ -59,11 +59,11 @@ export default function Win() {
 
       {/* CTA Section */}
       <div className="bg-[#deb71d] text-black  text-center max-h-[70vh] p-6  shadow-lg overflow-auto w-full">
-        <h2 className="text-4xl font-black mb-4">هل الدورة هادي مديورة ليك؟</h2>
-        <p className="mb-8 font-bold">
+        <h2 className="text-[1.7em] font-black mb-4">هل الدورة هادي ليك؟</h2>
+        <p className="mb-8 font-bold text-[0.9em]">
           إذا جاوبت بـ "نعم" على وحدة من هاد الأسئلة… راك في المكان الصح:
         </p>
-        <ul className="list-disc list-inside space-y-2 mb-4">
+        <ul className="text-[0.89em] list-disc list-inside space-y-2 mb-4">
           <li>تحس روحك تضيّع وقت في مهام تتعاود؟</li>
           <li>تحب تدير خدمتك أسرع وتدخل دخل أكثر؟</li>
           <li>حاب تطلق مشروع ذكي موقع ولا تطبيق… بس ماكش مبرمج؟</li>

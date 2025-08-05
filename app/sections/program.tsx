@@ -108,8 +108,7 @@ const Program: React.FC = () => {
             برنامج دورة الذكاء الاصطناعي
           </h1>
           <p className="text-base sm:text-lg md:text-xl text-yellow/70 mb-6 sm:mb-8 max-w-3xl mx-auto px-2">
-            تعلم الذكاء الاصطناعي من الصفر حتى الاحتراف مع مشاريع عملية وشهادة
-            معتمدة
+            في 4 أسابيع فقط… تتعلم، تطبّق، وتخدم مشروع رقمي جاهز للبيع!
           </p>
 
           {/* Course Stats */}
@@ -263,7 +262,7 @@ const Program: React.FC = () => {
                     </span>
                   </div>
                   <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-extrabold text-yellow">
-                    المشروع النهائي: خدمتك الرقمية بالذكاء الاصطناعي
+                    المشروع النهائي
                   </h3>
                 </div>
                 <div className="text-yellow/80 text-sm sm:text-base md:text-lg mb-2">
@@ -273,9 +272,6 @@ const Program: React.FC = () => {
             </div>
 
             <div className="mt-4 border-t border-yellow/20 pt-4 sm:pt-6">
-              <h4 className="text-base sm:text-lg md:text-xl font-semibold text-yellow mb-3 sm:mb-4 text-right">
-                المواضيع المشمولة:
-              </h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 md:gap-4">
                 <div className="flex items-center justify-end gap-2 sm:gap-3 p-2 sm:p-3 bg-yellow/5 rounded-md sm:rounded-lg border border-yellow/10">
                   <span className="text-white text-sm sm:text-base text-right">
