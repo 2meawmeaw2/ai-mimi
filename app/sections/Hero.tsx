@@ -133,9 +133,9 @@ const Hero = () => {
       <div className="bg-black/50 absolute inset-0 z-50 w-full h-full black-overlay" />
 
       {/* Main text overlay - responsive positioning and sizing */}
-      <div className="pointer-events-none absolute z-60 top-[10%] sm:top-[15%] lg:top-[20%] w-full h-full main-text px-4 sm:px-6 lg:px-8">
+      <div className="pointer-events-none absolute z-60 top-[5%] sm:top-[15%] lg:top-[15%] w-full h-full main-text px-4 sm:px-6 lg:px-8">
         {/* "وأخيرا" heading - responsive font sizes */}
-        <h2 className="overflow-clip text-center font-medium  sm:py-2 text-[5rem] sm:text-5xl md:text-6xl lg:text-7xl my-1 font-arabic">
+        <h2 className="overflow-clip text-center font-medium  sm:py-2 text-[3rem] sm:text-5xl md:text-6xl lg:text-7xl my-1 font-arabic">
           وأخيرا
         </h2>
 
