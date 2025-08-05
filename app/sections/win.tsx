@@ -62,7 +62,7 @@ export default function Win() {
         <h2 className="text-[1.7em] font-black mb-4">هل الدورة هادي ليك؟</h2>
         <p className="mb-8 font-bold text-[0.9em]">
           إذا جاوبت بـ &quot;نعم&quot; على وحدة من هاد الأسئلة، راك في المكان
-          الصح.{" "}
+          الصح.
         </p>
         <ul className="text-[0.89em] list-disc list-inside space-y-2 mb-4">
           <li>تحس روحك تضيّع وقت في مهام تتعاود؟</li>

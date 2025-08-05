@@ -31,10 +31,9 @@ const Hero = () => {
       .from(
         ".ai",
         {
-          delay: 0.2,
           autoAlpha: 0,
           yPercent: 50,
-          duration: 1,
+          duration: 0.5,
           ease: "power2.out",
         },
         0
@@ -44,7 +43,7 @@ const Hero = () => {
         ".hero",
         {
           clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-          duration: 1.2,
+          duration: 0.5,
           ease: "power2.out",
         },
         "+=1"
@@ -64,7 +63,7 @@ const Hero = () => {
       .to(
         ".para2",
         {
-          duration: 1,
+          duration: 0.5,
           ease: "power1.inOut",
         },
         "<"
@@ -73,7 +72,7 @@ const Hero = () => {
         ".main-text",
         {
           yPercent: 25,
-          duration: 1,
+          duration: 0.5,
           ease: "power1.inOut",
           scale: 1.4,
         },
@@ -82,7 +81,7 @@ const Hero = () => {
       .to(
         ".background-grid",
         {
-          duration: 1.5,
+          duration: 0.5,
           scale: 1.2,
           ease: "power1.inOut",
         },

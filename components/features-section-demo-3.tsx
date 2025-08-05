@@ -116,6 +116,24 @@ export default function WorkShowcase() {
         },
       }
     );
+
+    if (window.innerWidth >= 1024) {
+      const cardWidth = 300 + 24; // 300px card + 24px gap
+      const totalCards = projects.length;
+      const loopDuration = totalCards * 1.5;
+
+      gsap.to(".scroll-card", {
+        x: () => `-=${cardWidth * totalCards}`,
+        duration: loopDuration,
+        ease: "none",
+        repeat: -1,
+        modifiers: {
+          x: gsap.utils.unitize(
+            (x) => parseFloat(x) % (cardWidth * totalCards)
+          ),
+        },
+      });
+    }
   }, []);
 
   return (
@@ -124,7 +142,7 @@ export default function WorkShowcase() {
         ref={titleRef}
         className="text-4xl md:text-5xl font-bold text-yellow text-center mb-12 drop-shadow-[0_2px_4px_rgba(234,179,8,0.5)]"
       >
-        أعمالي
+        وش قدرت ندير بفضل الذكاء الاصطناعي؟
       </h2>
 
       <div ref={containerRef} className="overflow-x-auto no-scrollbar px-4">
