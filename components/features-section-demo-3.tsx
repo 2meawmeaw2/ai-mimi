@@ -133,15 +133,15 @@ export default function WorkShowcase() {
         const wrapper = scrollWrapRef.current;
         if (!wrapper) return;
 
-        const distance = wrapper.scrollWidth / 2;
+        const totalWidth = wrapper.scrollWidth / 2;
 
         gsap.to(wrapper, {
-          x: `-=${distance}`,
+          x: `-=${totalWidth}`,
           duration: projects.length * 2,
           ease: "none",
           repeat: -1,
           modifiers: {
-            x: gsap.utils.wrap(-distance, 0),
+            x: gsap.utils.unitize(gsap.utils.wrap(-totalWidth, 0)), // keep wrapping in px
           },
         });
       });
