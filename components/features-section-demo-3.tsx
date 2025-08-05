@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -8,10 +8,18 @@ import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
+interface Project {
+  title: string;
+  description: string;
+  image: string;
+}
+
 export default function WorkShowcase() {
-  const titleRef = useRef(null);
-  const containerRef = useRef(null);
-  const projects = [
+  const titleRef = useRef<HTMLHeadingElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const scrollWrapRef = useRef<HTMLDivElement | null>(null);
+
+  const projects: Project[] = [
     {
       title: "بوت التدبر",
       description: "خدمت بوت يساعد الناس يتدبروا القرآن بطريقة ذكية وبسيطة.",
@@ -67,6 +75,7 @@ export default function WorkShowcase() {
       image: "/projects/10.jpg",
     },
   ];
+
   useGSAP(() => {
     gsap.fromTo(
       titleRef.current,
@@ -117,23 +126,34 @@ export default function WorkShowcase() {
       }
     );
 
-    if (window.innerWidth >= 1024) {
-      const cardWidth = 300 + 24; // 300px card + 24px gap
-      const totalCards = projects.length;
-      const loopDuration = totalCards * 1.5;
+    let ctx: gsap.Context | undefined;
 
-      gsap.to(".scroll-card", {
-        x: () => `-=${cardWidth * totalCards}`,
-        duration: loopDuration,
-        ease: "none",
-        repeat: -1,
-        modifiers: {
-          x: gsap.utils.unitize(
-            (x) => parseFloat(x) % (cardWidth * totalCards)
-          ),
-        },
+    if (window.innerWidth >= 1024) {
+      ctx = gsap.context(() => {
+        const wrapper = scrollWrapRef.current;
+        if (!wrapper) return;
+
+        const distance = wrapper.scrollWidth / 2;
+
+        gsap.to(wrapper, {
+          x: `-=${distance}`,
+          duration: projects.length * 2,
+          ease: "none",
+          repeat: -1,
+          modifiers: {
+            x: gsap.utils.wrap(-distance, 0),
+          },
+        });
       });
     }
+
+    return () => ctx?.revert();
+  }, []);
+
+  useEffect(() => {
+    const resize = () => ScrollTrigger.refresh();
+    window.addEventListener("resize", resize);
+    return () => window.removeEventListener("resize", resize);
   }, []);
 
   return (
@@ -145,9 +165,12 @@ export default function WorkShowcase() {
         وش قدرت ندير بفضل الذكاء الاصطناعي؟
       </h2>
 
-      <div ref={containerRef} className="overflow-x-auto no-scrollbar px-4">
-        <div className="flex mx-auto gap-6 w-max pl-4 pr-8">
-          {projects.map((proj, index) => (
+      <div
+        ref={containerRef}
+        className="overflow-hidden lg:overflow-x-hidden no-scrollbar px-4"
+      >
+        <div className="flex mx-auto gap-6 w-max pl-4 pr-8" ref={scrollWrapRef}>
+          {[...projects, ...projects].map((proj, index) => (
             <div
               key={index}
               className="scroll-card min-w-[300px] max-w-[300px] flex-shrink-0 bg-gradient-to-br from-black/90 to-black/70 border border-yellow/30 rounded-xl shadow-lg shadow-yellow/10 p-4"
@@ -157,8 +180,8 @@ export default function WorkShowcase() {
                   src={proj.image}
                   alt={proj.title}
                   fill
-                  className="object-cover "
-                  sizes="(max-width: 768px)   100vw, 300px"
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 300px"
                   priority={index === 0}
                 />
               </div>
