@@ -133,7 +133,7 @@ const Hero = () => {
       id="Hero"
       className="fixed  top-0 h-[120dvh] w-[100vw] font-arabic"
     >
-      <Image src="/logo/favicon.jpg" fill alt="logo" className="hidden" />
+      <Image src="/favicon.jpg" fill alt="logo" className="hidden" />
       <div className="bg-black/50 absolute inset-0 z-50 w-full h-full black-overlay" />
 
       {/* Main text overlay - responsive positioning and sizing */}
