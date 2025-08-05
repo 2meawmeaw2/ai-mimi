@@ -91,6 +91,13 @@ body {
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 }
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 
 body {
   background: var(--black);

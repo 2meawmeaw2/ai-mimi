@@ -38,7 +38,8 @@ const Program: React.FC = () => {
       ],
     },
     {
-      title: "خلي AI يجاوب على الزبائن في بلاصتك",
+      title: "خلي الذكاء الاصطناعي يرد على الزبائن في بلاصتك",
+
       duration: "أسبوع واحد",
       lessons: 1,
       topics: [
@@ -48,7 +49,15 @@ const Program: React.FC = () => {
       ],
     },
     {
-      title: "خدم GPT خاص يخدم معاك",
+      title: "كيفاش الذكاء الاصطناعي يعاونك في تنظيم الوقت، المهام، والفراغ",
+      duration: "أسبوع واحد",
+      lessons: 1,
+      topics: [
+        "التطبيق: تخطيط ذكي لـ شهر باستخدام ChatGPT + Notion أو Taskade",
+      ],
+    },
+    {
+      title: "خدم نموذج GPT خاص يخدم معاك",
       duration: "أسبوع واحد",
       lessons: 1,
       topics: [
@@ -88,7 +97,10 @@ const Program: React.FC = () => {
   );
 
   return (
-    <section className=" relative z-50 text-white font-arabic min-h-screen py-8 sm:py-12 px-3 sm:px-4 md:px-8">
+    <section
+      id="Program"
+      className=" relative z-50 text-white font-arabic min-h-screen py-8 sm:py-12 px-3 sm:px-4 md:px-8"
+    >
       {/* Header */}
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-8 sm:mb-12">

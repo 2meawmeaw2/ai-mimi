@@ -1,279 +1,122 @@
-import React, { useState, useEffect, useRef } from "react";
-import { cn } from "@/lib/utils";
-import createGlobe from "cobe";
-import { motion } from "framer-motion";
-import { IconBrandYoutubeFilled } from "@tabler/icons-react";
-import Image from "next/image";
+"use client";
 
-export default function FeaturesSectionDemo() {
-  const features = [
-    {
-      title: ": وش درت",
-      description:
-        "سشتيسشنتيا سشنتا ينمشتا سيشنس تاين اسشنتا ينسشتا نيتاشسنمتيا تنشاس مينا شنتاس يمنتاش نمتاس",
-      className: "border-b col-span-1 lg:col-span-2 dark:border-neutral-800",
-    },
-    {
-      title: ": مصمم",
-      description:
-        "سشتيسشنتيا سشنتا ينمشتا سيشنس تاين اسشنتا ينسشتا نيتاشسنمتيا تنشاس مينا شنتاس يمنتاش نمتاس",
-      skeleton: <SkeletonThree />,
-      className: "col-span-1 lg:col-span-3 lg:border-r dark:border-neutral-800",
-    },
-    {
-      title: ": مياو",
-      description:
-        "سشتيسشنتيا سشنتا ينمشتا سيشنس تاين اسشنتا ينسشتا نيتاشسنمتيا تنشاس مينا شنتاس يمنتاش نمتاس",
-      className: "col-span-1 lg:col-span-3 border-b lg:border-none",
-    },
-  ];
+import React, { useRef } from "react";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
-  return (
-    <div className="relative z-20 py-6 md:py-10 lg:py-40 max-w-7xl mx-auto px-4">
-      <div className="relative">
-        <div className="grid grid-cols-1 lg:grid-cols-6 mt-8 md:mt-12 xl:border rounded-md dark:border-neutral-800">
-          {features.map((feature) => (
-            <FeatureCard key={feature.title} className={feature.className}>
-              <FeatureTitle>{feature.title}</FeatureTitle>
-              <FeatureDescription>{feature.description}</FeatureDescription>
-              {feature.skeleton && (
-                <div className="h-full w-full mt-4">{feature.skeleton}</div>
-              )}
-            </FeatureCard>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
+gsap.registerPlugin(ScrollTrigger);
 
-const FeatureCard = ({
-  children,
-  className,
-}: {
-  children?: React.ReactNode;
-  className?: string;
-}) => {
-  return (
-    <div
-      className={cn(`p-4 sm:p-6 md:p-8 relative overflow-hidden`, className)}
-    >
-      {children}
-    </div>
-  );
-};
+const projects = [
+  {
+    title: "واجهة مستخدم تفاعلية",
+    description:
+      "تصميم واجهة باستخدام React.js و TailwindCSS لمنتج رقمي معاصر.",
+    image: "/projects/ui1.jpg",
+  },
+  {
+    title: "لوحة تحكم ديناميكية",
+    description: "لوحة تحكم مبنية بـ Next.js مع تكامل API وتحليل بيانات.",
+    image: "/projects/dashboard.jpg",
+  },
+  {
+    title: "صفحة هبوط تسويقية",
+    description: "إنشاء صفحة هبوط سريعة الاستجابة مع تجربة مستخدم جذابة.",
+    image: "/projects/landing.jpg",
+  },
+  {
+    title: "تطبيق تعليمي للأطفال",
+    description: "تطبيق ويب تفاعلي لتحفيظ الأطفال مبادئ البرمجة.",
+    image: "/projects/eduapp.jpg",
+  },
+];
 
-const FeatureTitle = ({ children }: { children?: React.ReactNode }) => {
-  return (
-    <p className="max-w-5xl mx-auto text-right tracking-tight text-white text-lg md:text-xl lg:text-2xl md:leading-snug">
-      {children}
-    </p>
-  );
-};
+export default function WorkShowcase() {
+  const titleRef = useRef(null);
+  const containerRef = useRef(null);
 
-const FeatureDescription = ({ children }: { children?: React.ReactNode }) => {
-  return (
-    <p className="text-xs sm:text-sm md:text-base w-full text-right max-w-full ml-auto my-2">
-      {children}
-    </p>
-  );
-};
+  useGSAP(() => {
+    gsap.fromTo(
+      titleRef.current,
+      { opacity: 0, y: 80, rotationX: -60, scale: 0.8 },
+      {
+        opacity: 1,
+        y: 0,
+        rotationX: 0,
+        scale: 1,
+        duration: 1.2,
+        ease: "back.out(1.7)",
+        scrollTrigger: {
+          trigger: titleRef.current,
+          start: "top 90%",
+          toggleActions: "play none none reverse",
+        },
+      }
+    );
 
-const SkeletonThree = () => {
-  return (
-    <a
-      href="https://www.youtube.com/watch?v=RPa3_AD1_Vs"
-      target="__blank"
-      className="relative flex gap-10 h-full group/image"
-    >
-      <div className="w-full mx-auto bg-transparent dark:bg-transparent group h-full">
-        <div className="flex flex-1 w-full h-full flex-col space-y-2 relative">
-          <IconBrandYoutubeFilled className="h-10 w-10 md:h-16 md:w-16 lg:h-20 lg:w-20 absolute z-10 inset-0 text-red-500 m-auto" />
-          <div className="relative aspect-video w-full">
-            <Image
-              src="/file.svg"
-              alt="header"
-              fill
-              className="object-cover object-center rounded-sm blur-none group-hover/image:blur-md transition-all duration-200"
-            />
-          </div>
-        </div>
-      </div>
-    </a>
-  );
-};
-
-export const SkeletonOne = () => {
-  return (
-    <div className="relative flex py-8 px-2 gap-10 h-full">
-      <div className="w-full  p-5  mx-auto bg-white dark:bg-neutral-900 shadow-2xl group h-full">
-        <div className="flex flex-1 w-full h-full flex-col space-y-2  ">
-          {/* TODO */}
-          <Image
-            src="/file.svg"
-            alt="header"
-            width={800}
-            height={800}
-            className="h-full w-full aspect-square object-cover object-left-top rounded-sm"
-          />
-        </div>
-      </div>
-
-      <div className="absolute bottom-0 z-40 inset-x-0 h-60 bg-gradient-to-t from-white dark:from-black via-white dark:via-black to-transparent w-full pointer-events-none" />
-      <div className="absolute top-0 z-40 inset-x-0 h-60 bg-gradient-to-b from-white dark:from-black via-transparent to-transparent w-full pointer-events-none" />
-    </div>
-  );
-};
-
-export const SkeletonTwo = () => {
-  const images = [
-    "https://images.unsplash.com/photo-1517322048670-4fba75cbbb62?q=80&w=3000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1573790387438-4da905039392?q=80&w=3425&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1555400038-63f5ba517a47?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1554931670-4ebfabf6e7a9?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1546484475-7f7bd55792da?q=80&w=2581&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  ];
-
-  const imageSet = [...images, ...images, ...images, ...images];
-
-  const imageVariants = {
-    whileHover: {
-      scale: 1.1,
-      rotate: 0,
-      zIndex: 100,
-    },
-  };
-
-  const scrollAnimation = {
-    animate: {
-      x: ["0%", "-100%"],
-    },
-    transition: {
-      x: {
-        repeat: Infinity,
-        duration: 40,
-        ease: "linear",
-      },
-    },
-  };
-
-  const [rotations, setRotations] = useState<number[]>([]);
-
-  useEffect(() => {
-    const generateRotations = Array(imageSet.length)
-      .fill(0)
-      .map(() => Math.random() * 20 - 10);
-    setRotations(generateRotations);
-  }, [imageSet.length]);
-
-  return (
-    <div className="relative flex flex-col items-start p-8 gap-10 h-full overflow-hidden bg-black rounded-2xl">
-      <motion.div
-        className="flex flex-row -ml-20"
-        {...scrollAnimation}
-        transition={{ ...scrollAnimation.transition, duration: 35 }}
-      >
-        {imageSet.map((image, idx) => (
-          <motion.div
-            variants={imageVariants}
-            key={`first-${idx}`}
-            whileHover="whileHover"
-            className="rounded-xl -mr-4 mt-4 p-1 bg-neutral-800 border border-neutral-700 shrink-0 overflow-hidden"
-          >
-            <Image
-              width={100}
-              height={100}
-              src="/file.svg"
-              alt="Scrolling image"
-              className="rounded-lg h-20 w-20 md:h-40 md:w-40 object-cover shrink-0"
-            />
-          </motion.div>
-        ))}
-      </motion.div>
-
-      <motion.div
-        className="flex flex-row -ml-40"
-        {...scrollAnimation}
-        transition={{ ...scrollAnimation.transition, duration: 45, delay: 3 }}
-      >
-        {imageSet.map((image, idx) => (
-          <motion.div
-            variants={imageVariants}
-            key={`second-${idx}`}
-            whileHover="whileHover"
-            style={{
-              rotate: rotations[idx] || 0,
-            }}
-            className="rounded-xl -mr-4 mt-4 p-1 bg-neutral-800 border border-neutral-700 shrink-0 overflow-hidden"
-          >
-            <Image
-              width={100}
-              height={100}
-              src="/file.svg"
-              alt="Scrolling image"
-              className="rounded-lg h-20 w-20 md:h-40 md:w-40 object-cover shrink-0"
-            />
-          </motion.div>
-        ))}
-      </motion.div>
-
-      <div className="absolute left-0 z-[100] inset-y-0 w-20 bg-gradient-to-r from-yellow/20 via-80% via-black/30 to-100% to-black/0 h-full pointer-events-none" />
-      <div className="absolute right-0 z-[100] inset-y-0 w-20 bg-gradient-to-l from-yellow/20 via-80% via-black/30 to-100% to-black/0 h-full pointer-events-none" />
-    </div>
-  );
-};
-export const SkeletonFour = () => {
-  return (
-    <div className="h-60 md:h-60  flex flex-col items-center relative bg-transparent dark:bg-transparent mt-10">
-      <Globe className="absolute -right-10 md:-right-10 -bottom-80 md:-bottom-72" />
-    </div>
-  );
-};
-
-export const Globe = ({ className }: { className?: string }) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    let phi = 0;
-
-    if (!canvasRef.current) return;
-
-    const globe = createGlobe(canvasRef.current, {
-      devicePixelRatio: 2,
-      width: 600 * 2,
-      height: 600 * 2,
-      phi: 0,
-      theta: 0,
-      dark: 1,
-      diffuse: 1.2,
-      mapSamples: 16000,
-      mapBrightness: 6,
-      baseColor: [0.3, 0.3, 0.3],
-      markerColor: [0.1, 0.8, 1],
-      glowColor: [1, 1, 1],
-      markers: [
-        // longitude latitude
-        { location: [37.7595, -122.4367], size: 0.03 },
-        { location: [40.7128, -74.006], size: 0.1 },
-      ],
-      onRender: (state) => {
-        // Called on every animation frame.
-        // `state` will be an empty object, return updated params.
-        state.phi = phi;
-        phi += 0.01;
-      },
+    gsap.to(titleRef.current, {
+      textShadow:
+        "0 0 20px rgba(234,179,8,0.8), 0 0 40px rgba(234,179,8,0.6), 0 0 60px rgba(234,179,8,0.4)",
+      duration: 2,
+      repeat: -1,
+      yoyo: true,
+      ease: "power2.inOut",
     });
 
-    return () => {
-      globe.destroy();
-    };
+    gsap.fromTo(
+      ".scroll-card",
+      {
+        opacity: 0,
+        y: 40,
+        scale: 0.9,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 1.2,
+        stagger: 0.2,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      }
+    );
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      style={{ width: 600, height: 600, maxWidth: "100%", aspectRatio: 1 }}
-      className={className}
-    />
+    <section className="w-full py-20 mt-20 z-60 font-arabic relative">
+      <h2
+        ref={titleRef}
+        className="text-4xl md:text-5xl font-bold text-yellow text-center mb-12 drop-shadow-[0_2px_4px_rgba(234,179,8,0.5)]"
+      >
+        أعمالي
+      </h2>
+
+      <div ref={containerRef} className="overflow-x-auto no-scrollbar px-4">
+        <div className="flex gap-6 w-max pl-4 pr-8">
+          {projects.map((proj, index) => (
+            <div
+              key={index}
+              className="scroll-card min-w-[300px] max-w-[300px] flex-shrink-0 bg-gradient-to-br from-black/90 to-black/70 border border-yellow/30 rounded-xl shadow-lg shadow-yellow/10 p-4"
+            >
+              <img
+                src={proj.image}
+                alt={proj.title}
+                className="rounded-lg w-full h-[180px] object-cover border border-yellow/20"
+              />
+              <h3 className="text-xl text-yellow font-bold mt-4">
+                {proj.title}
+              </h3>
+              <p className="text-white/90 text-sm mt-2 leading-relaxed">
+                {proj.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
-};
+}

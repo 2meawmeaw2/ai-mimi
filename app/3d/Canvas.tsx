@@ -103,8 +103,9 @@ export function Scene(): React.JSX.Element {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: "#Who",
-        start: "top bottom",
-        end: "bottom top",
+        start: "-120% center",
+        end: "120% center",
+        markers: true,
         scrub: 1,
         refreshPriority: -1,
       },
@@ -122,12 +123,10 @@ export function Scene(): React.JSX.Element {
 
     // First scroll section - entrance
     tl.to([positionProxy, rotationProxy], {
-      duration: 0.3,
-      opacity: 0.5,
-      xPercent: -40,
-      yPercent: 10,
+      xPercent: 50,
+      yPercent: -10,
       x: 0,
-      y: 7,
+      y: -7,
       z: 0,
       ease: "power2.out",
       onUpdate: (): void => {
@@ -145,15 +144,82 @@ export function Scene(): React.JSX.Element {
         ] as RotationTuple);
       },
     })
+      .to(
+        [positionProxy, rotationProxy],
+        {
+          opacity: 0,
+          ease: "power2.out",
+          onUpdate: (): void => {
+            if (containerRef.current) {
+              gsap.set(containerRef.current, {
+                opacity: positionProxy.opacity,
+              });
+            }
+          },
+        },
+        0
+      )
+
+      // Second scroll section - middle
+      .to(
+        [positionProxy, rotationProxy],
+        {
+          duration: 0.4,
+          opacity: 1,
+          xPercent: -25,
+          yPercent: -50,
+          x: 0,
+          y: 0.25 * Math.PI,
+          z: -0.25 * Math.PI,
+          ease: "power2.inOut",
+          onUpdate: (): void => {
+            if (containerRef.current) {
+              gsap.set(containerRef.current, {
+                opacity: positionProxy.opacity,
+                xPercent: positionProxy.xPercent,
+                yPercent: positionProxy.yPercent,
+              });
+            }
+            setRotation([
+              rotationProxy.x,
+              rotationProxy.y,
+              rotationProxy.z,
+            ] as RotationTuple);
+          },
+        },
+        "<+0.5"
+      );
+
+    const ProgramTl = gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: "#Program",
+          start: "-10% center",
+          end: "90% center",
+          markers: true,
+
+          scrub: 1.5,
+          refreshPriority: -1,
+        },
+        onComplete: (): void => {
+          // Remove will-change when this scroll section is complete
+          // Note: We'll keep it since other animations might still be running
+        },
+        onStart: (): void => {
+          // Ensure will-change is set when scroll animation starts
+          if (containerRef.current) {
+            setWillChange(containerRef.current, "transform, opacity");
+          }
+        },
+      })
       .to([positionProxy, rotationProxy], {
-        duration: 0.4,
-        opacity: 1,
-        xPercent: 40,
-        yPercent: -60,
+        opacity: 0.4,
+        xPercent: -40,
+        yPercent: 10,
         x: 0,
-        y: -1,
+        y: Math.PI * 2 + Math.PI / 4,
         z: 0,
-        ease: "power2.inOut",
+        ease: "power2.out",
         onUpdate: (): void => {
           if (containerRef.current) {
             gsap.set(containerRef.current, {
@@ -169,16 +235,36 @@ export function Scene(): React.JSX.Element {
           ] as RotationTuple);
         },
       })
-      // Second scroll section - middle
       .to([positionProxy, rotationProxy], {
-        duration: 0.4,
         opacity: 1,
-        xPercent: 0,
-        yPercent: 0,
-        x: -0.7,
-        y: -6.1,
-        z: 0,
-        ease: "power2.inOut",
+        xPercent: 40,
+        yPercent: -40,
+        x: Math.PI * 2,
+        y: Math.PI * 2 + -Math.PI / 4,
+        z: Math.PI,
+        ease: "power2.out",
+        onUpdate: (): void => {
+          if (containerRef.current) {
+            gsap.set(containerRef.current, {
+              opacity: positionProxy.opacity,
+              xPercent: positionProxy.xPercent,
+              yPercent: positionProxy.yPercent,
+            });
+          }
+          setRotation([
+            rotationProxy.x,
+            rotationProxy.y,
+            rotationProxy.z,
+          ] as RotationTuple);
+        },
+      })
+      .to([positionProxy, rotationProxy], {
+        xPercent: -40,
+        yPercent: -40,
+        x: 0,
+        y: Math.PI * 2 + +Math.PI / 3.4,
+        z: Math.PI * 2 + Math.PI / 6,
+        ease: "power2.out",
         onUpdate: (): void => {
           if (containerRef.current) {
             gsap.set(containerRef.current, {
@@ -194,12 +280,11 @@ export function Scene(): React.JSX.Element {
           ] as RotationTuple);
         },
       });
-
     // Third scroll section - separate timeline for Win section
     const winTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: "#Win",
-        start: "90% center",
+        start: "center center",
         end: "120% center",
         scrub: 1,
         refreshPriority: -1,
@@ -218,7 +303,7 @@ export function Scene(): React.JSX.Element {
       xPercent: 40,
       yPercent: 0,
       x: 0,
-      y: -1,
+      y: -0.25 * Math.PI,
       z: 0,
       ease: "power2.inOut",
       onUpdate: (): void => {
@@ -304,7 +389,7 @@ export function Scene(): React.JSX.Element {
   return (
     <div
       ref={containerRef}
-      className="fixed bottom-0 z-50 h-[50vh] w-full"
+      className="fixed bottom-0 z-60 h-[50vh]  w-full pointer-events-none"
       style={{
         // Set initial will-change in CSS for better performance on first load
         willChange: isMobileDevice ? "transform, opacity" : "auto",
@@ -326,6 +411,8 @@ export function Scene(): React.JSX.Element {
               : window.devicePixelRatio
             : 1 // Default value for SSR
         }
+        gl={{ preserveDrawingBuffer: true }}
+        style={{ pointerEvents: "none" }}
       >
         <group scale={0.03} rotation={[rotation[0], rotation[1], rotation[2]]}>
           <ambientLight intensity={0.4} />
@@ -335,6 +422,7 @@ export function Scene(): React.JSX.Element {
             speed={isMobileDevice ? 1 : 2} // Reduce float speed on mobile
             rotationIntensity={isMobileDevice ? 1 : 2} // Reduce rotation intensity on mobile
             floatIntensity={2} // Reduce float intensity on mobile
+            floatingRange={[-1, 1]}
           >
             <Robot boxSize={boxSize} />
           </Float>

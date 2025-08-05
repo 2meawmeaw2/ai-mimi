@@ -1,110 +1,93 @@
-"use client";
-import SpotlightCard from "../SpotlightCard/SpotlightCard";
+import { cn } from "@/lib/utils";
+import {
+  IconAdjustmentsBolt,
+  IconCloud,
+  IconCurrencyDollar,
+  IconEaseInOut,
+  IconHeart,
+  IconHelp,
+  IconRouteAltLeft,
+  IconTerminal2,
+} from "@tabler/icons-react";
 
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import ScrollTrigger from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(useGSAP, ScrollTrigger);
-const Win: React.FC = () => {
-  useGSAP(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".win",
-        start: "top top",
-        end: "300% top",
-        scrub: 1.5,
-        pin: true,
-        markers: true,
-      },
-    });
-
-    tl.from(".card1", {
-      yPercent: 20,
-      x: window.innerWidth,
-      rotation: 45,
-      // Add explicit duration
-    })
-      .from(".card2", {
-        yPercent: -20,
-        x: -window.innerWidth,
-        rotation: -40,
-      }) // Overlap timing to control pacing
-      .from(".card3", {
-        yPercent: 30,
-        x: -window.innerWidth,
-        rotation: 60,
-      })
-
-      .from(".card4", {
-        yPercent: -30,
-        x: window.innerWidth,
-        rotation: -50,
-      })
-      .from(".card5", {
-        yPercent: 40,
-        x: window.innerWidth,
-        rotation: 70,
-      });
-  });
-  const rotations = [
-    "rotate(-8deg)",
-    "rotate(12deg)",
-    "rotate(4deg)",
-    "rotate(-15deg)",
-    "rotate(9deg)",
+export default function Win() {
+  const features = [
+    {
+      title: "Built for developers",
+      description:
+        "Built for engineers, developers, dreamers, thinkers and doers.",
+      icon: <IconTerminal2 />,
+    },
+    {
+      title: "Ease of use",
+      description:
+        "It's as easy as using an Apple, and as expensive as buying one.",
+      icon: <IconEaseInOut />,
+    },
+    {
+      title: "Pricing like no other",
+      description:
+        "Our prices are best in the market. No cap, no lock, no credit card required.",
+      icon: <IconCurrencyDollar />,
+    },
+    {
+      title: "100% Uptime guarantee",
+      description: "We just cannot be taken down by anyone.",
+      icon: <IconCloud />,
+    },
+    {
+      title: "Multi-tenant Architecture",
+      description: "You can simply share passwords instead of buying new seats",
+      icon: <IconRouteAltLeft />,
+    },
   ];
-  const cards = [1, 2, 3, 4, 5];
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  relative z-10 py-10 max-w-7xl mx-auto">
+      {features.map((feature, index) => (
+        <Feature key={feature.title} {...feature} index={index} />
+      ))}
+    </div>
+  );
+}
 
+const Feature = ({
+  title,
+  description,
+  icon,
+  index,
+}: {
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+  index: number;
+}) => {
   return (
     <div
       id="Win"
-      className="win relative z-50  min-h-[100dvh] w-full  lg:pt-20 font-arabic "
+      className={cn(
+        "flex flex-col lg:border-r  py-10 relative group/feature dark:border-neutral-800",
+        (index === 0 || index === 4) && "lg:border-l dark:border-neutral-800",
+        index < 4 && "lg:border-b dark:border-neutral-800"
+      )}
     >
-      <div className="w-full h-full sticky top-0">
-        <h1 className="overflow-clip  text-center font-black text-2xl md:text-4xl  text-yellow  py-6">
-          وش راح نربح من هذي الدورة
-        </h1>
-        <div className=" w-full h-[100vh]  relative  flex justify-center items-start pt-[30vh] ">
-          {cards.map((_, i) => (
-            <SpotlightCard
-              key={i}
-              className={`card${i + 1} z-${
-                (i + 2) * 10
-              }  w-[60%] h-[40%] max-w-100  border-2 border-yellow shadow-sm shadow-yellow/60`}
-              spotlightColor="rgba(222, 197, 49, 0.3)"
-              style={{ transform: `translateY(-50%) ${rotations[i]}` }}
-            >
-              <div className="w-full h-full bg-black absolute inset-0 -z-10" />
-              <div className="w-full h-full bg-yellow/6 absolute inset-0 -z-10" />
-              <div className="flex flex-col items-start justify-center gap-10 h-full text-white max-w-xs p-6 ">
-                <div className="text-3xl">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
-                    fill="gold"
-                    viewBox="0 0 24 24"
-                    style={{
-                      filter: "drop-shadow(0 0 8px rgba(255, 215, 0, 0.6))",
-                    }}
-                  >
-                    <path d="M12 2l1.09 3.47L17 7l-3.47 1.09L12 12l-1.09-3.47L7 7l3.47-1.09L12 2zM6 14l.87 2.61L10 17l-2.13.39L6 20l-.87-2.61L2 17l2.13-.39L6 14zm12 0l.87 2.61L22 17l-2.13.39L18 20l-.87-2.61L14 17l2.13-.39L18 14z" />
-                  </svg>
-                </div>
-                <h2 className="text-xl font-black text-white text-right w-full">
-                  عزّز تجربتك
-                </h2>
-                <p className="text-sm text-white/70 leading-relaxed text-right">
-                  استفد من مزايا حصرية، وخصائص مميزة، ودعم متواصل على مدار
-                  الساعة كعضو دائم في النادي.
-                </p>
-              </div>
-            </SpotlightCard>
-          ))}
-        </div>
+      {index < 4 && (
+        <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-t from-neutral-100 dark:from-neutral-800 to-transparent pointer-events-none" />
+      )}
+      {index >= 4 && (
+        <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-b from-neutral-100 dark:from-neutral-800 to-transparent pointer-events-none" />
+      )}
+      <div className="mb-4 relative z-10 px-10 text-neutral-600 dark:text-neutral-400">
+        {icon}
       </div>
+      <div className="text-lg font-bold mb-2 relative z-10 px-10">
+        <div className="absolute left-0 inset-y-0 h-6 group-hover/feature:h-8 w-1 rounded-tr-full rounded-br-full bg-neutral-300 dark:bg-neutral-700 group-hover/feature:bg-blue-500 transition-all duration-200 origin-center" />
+        <span className="group-hover/feature:translate-x-2 transition duration-200 inline-block text-neutral-800 dark:text-neutral-100">
+          {title}
+        </span>
+      </div>
+      <p className="text-sm text-neutral-600 dark:text-neutral-300 max-w-xs relative z-10 px-10">
+        {description}
+      </p>
     </div>
   );
 };
-export default Win;

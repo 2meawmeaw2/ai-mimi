@@ -3,7 +3,7 @@ import React, { useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import FeaturesSectionDemo from "@/components/features-section-demo-3";
+import WorkShowcase from "@/components/features-section-demo-3";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -209,7 +209,7 @@ const Who: React.FC = () => {
   };
 
   return (
-    <section id="Who" className="relative w-full font-arabic z-60 mt-[120vh]">
+    <section id="Who" className="relative w-full font-arabic z-40 mt-[120vh]">
       {/* Animated Background Element */}
       <div className="absolute bgblurmewa -top-50 left-1/2 -translate-x-1/2 -z-40 h-[90vh] w-[100vw] blur-[100px]">
         <div
@@ -226,7 +226,7 @@ const Who: React.FC = () => {
           ref={titleRef}
           className="text-4xl md:text-5xl font-bold text-yellow text-center drop-shadow-[0_2px_4px_rgba(234,179,8,0.5)] perspective-1000"
         >
-          {splitArabicIntoWords(": شكون أنا")}
+          {splitArabicIntoWords(":أنا شكون")}
         </h1>
 
         <div className="divider-line w-16 h-1 bg-yellow rounded-full origin-center"></div>
@@ -240,8 +240,6 @@ const Who: React.FC = () => {
           )}
         </p>
       </div>
-
-      <FeaturesSectionDemo />
     </section>
   );
 };
