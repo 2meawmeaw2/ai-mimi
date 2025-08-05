@@ -87,7 +87,7 @@ export default function WorkShowcase() {
   }, []);
 
   return (
-    <section className="w-full py-20 mt-20 z-60 font-arabic relative">
+    <section className="w-full  py-20 mt-20 z-60 font-arabic relative">
       <h2
         ref={titleRef}
         className="text-4xl md:text-5xl font-bold text-yellow text-center mb-12 drop-shadow-[0_2px_4px_rgba(234,179,8,0.5)]"
@@ -95,12 +95,12 @@ export default function WorkShowcase() {
         أعمالي
       </h2>
 
-      <div ref={containerRef} className="overflow-x-auto no-scrollbar px-4">
-        <div className="flex gap-6 w-max pl-4 pr-8">
+      <div ref={containerRef} className="overflow-x-auto  no-scrollbar px-4">
+        <div className="flex   mx-auto gap-6 w-max pl-4 pr-8">
           {projects.map((proj, index) => (
             <div
               key={index}
-              className="scroll-card min-w-[300px] max-w-[300px] flex-shrink-0 bg-gradient-to-br from-black/90 to-black/70 border border-yellow/30 rounded-xl shadow-lg shadow-yellow/10 p-4"
+              className="scroll-card  min-w-[300px] max-w-[300px] flex-shrink-0 bg-gradient-to-br from-black/90 to-black/70 border border-yellow/30 rounded-xl shadow-lg shadow-yellow/10 p-4"
             >
               <img
                 src={proj.image}
