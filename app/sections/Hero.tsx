@@ -184,7 +184,7 @@ const Hero = () => {
               href="#Contact"
               className="bg-yellow text-center text-black font-black py-2.5 sm:py-3 md:py-4 px-4 sm:px-6 md:px-8 rounded-lg sm:rounded-xl hover:bg-yellow/90 transition-colors duration-300 text-sm sm:text-base w-full max-w-xs mx-auto"
             >
-              سجل الآن – الأماكن محدودة
+              !!! سجل الآن – الأماكن محدودة
             </a>
           </div>
           <div className=" h-[20vh]  w-full" />

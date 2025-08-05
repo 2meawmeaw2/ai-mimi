@@ -302,17 +302,6 @@ const Program: React.FC = () => {
         </div>
 
         {/* Call to Action */}
-        <div className="mt-8 sm:mt-12 md:mt-16 text-center">
-          <div className="bg-gradient-to-r from-yellow/10 to-yellow/5 border border-yellow/20 rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-8 max-w-2xl mx-auto">
-            <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-yellow mb-3 sm:mb-4">
-              ابدأ رحلتك في الذكاء الاصطناعي اليوم
-            </h3>
-            <p className="text-yellow/70 mb-4 sm:mb-6 text-xs sm:text-sm md:text-base px-1">
-              انضم إلى آلاف الطلاب الذين تعلموا الذكاء الاصطناعي وغيروا مسارهم
-              المهني
-            </p>
-          </div>
-        </div>
       </div>
     </section>
   );
