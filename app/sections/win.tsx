@@ -13,37 +13,41 @@ import {
 export default function Win() {
   const features = [
     {
-      title: "مصمم للمطورين",
-      description: "مصمم للمهندسين والمطورين والحالمين والمفكرين والمنفذين.",
+      title: "8 حصص لايف (ومسجلة تبقى عندك)",
+      description: "تتعلم خطوة بخطوة وتعاود ترجع لأي درس وقت ما تحب.",
+      icon: <IconRouteAltLeft />,
+    },
+    {
+      title: "مجموعة تلغرام تفاعلية",
+      description:
+        "تطرح أسئلتك، تتبادل أفكارك، وتلقى الدعم من المشاركين والمدرّبة.",
       icon: <IconTerminal2 />,
     },
     {
-      title: "سهل الاستخدام",
-      description: "سهل الاستخدام مثل أجهزة Apple، وغالي مثلها.",
+      title: "دليل PDF شامل فيه +100 أداة",
+      description: "مع قوالب Prompts جاهزة باش تطلق خدمتك مباشرة وتربح الوقت.",
       icon: <IconEaseInOut />,
     },
     {
-      title: "أسعار لا مثيل لها",
-      description: "أفضل الأسعار في السوق. بدون اشتراك، بدون بطاقة ائتمان.",
+      title: "بوت تسويق مخصص للسوق الجزائري",
+      description: "يسقسيك شوية أسئلة ويعطيك خطة تسويق تخدمها بلا صداع.",
       icon: <IconCurrencyDollar />,
     },
     {
-      title: "ضمان تشغيل 100٪",
-      description: "لا أحد يستطيع إيقافنا.",
+      title: "هدية: حساب ChatGPT Plus مدفوع",
+      description: "تجرب وتطبق فيه كلشي بالراحة… بلا ما تخلص عليه.",
       icon: <IconCloud />,
-    },
-    {
-      title: "هيكل متعدد المستخدمين",
-      description: "شارك كلمات المرور بدلًا من شراء عضويات جديدة.",
-      icon: <IconRouteAltLeft />,
     },
   ];
   return (
     <div
       id="Win"
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 relative z-10 py-10 max-w-7xl mx-auto"
+      className="font-arabic grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 relative z-10 py-10 max-w-7xl mx-auto"
       dir="rtl"
     >
+      <h1 className="text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-yellow mb-3 sm:mb-4">
+        غير سجل راح تدي
+      </h1>
       {features.map((feature, index) => (
         <Feature key={feature.title} {...feature} index={index} />
       ))}
@@ -64,27 +68,27 @@ const Feature = ({
   return (
     <div
       className={cn(
-        "flex flex-col lg:border-r py-10 relative group/feature border-yellow-400/30",
-        (index === 0 || index === 4) && "lg:border-l border-yellow-400/30",
-        index < 4 && "lg:border-b border-yellow-400/30"
+        "flex flex-col lg:border-r py-10 relative group/feature border-white/30",
+        (index === 0 || index === 4) && "lg:border-l border-white/30",
+        index < 4 && "lg:border-b border-white/30"
       )}
     >
       {index < 4 && (
-        <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-t from-yellow-100/30 dark:from-yellow-900/10 to-transparent pointer-events-none" />
+        <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-t from-white/30 dark:from-white/10 to-transparent pointer-events-none" />
       )}
       {index >= 4 && (
-        <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-b from-yellow-100/30 dark:from-yellow-900/10 to-transparent pointer-events-none" />
+        <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-b from-white/30 dark:from-white/10 to-transparent pointer-events-none" />
       )}
-      <div className="mb-4 relative z-10 px-10 text-yellow-600 dark:text-yellow-400">
+      <div className="mb-4 relative z-10 px-10 text-white dark:text-white">
         {icon}
       </div>
       <div className="text-lg font-bold mb-2 relative z-10 px-10">
-        <div className="absolute right-0 inset-y-0 h-6 group-hover/feature:h-8 w-1 rounded-tl-full rounded-bl-full bg-yellow-300 dark:bg-yellow-700 group-hover/feature:bg-yellow-500 transition-all duration-200 origin-center" />
-        <span className="group-hover/feature:-translate-x-2 transition duration-200 inline-block text-yellow-800 dark:text-yellow-200">
+        <div className="absolute right-0 inset-y-0 h-6 group-hover/feature:h-8 w-1 rounded-tl-full rounded-bl-full bg-white/70 dark:bg-white/20 group-hover/feature:bg-white transition-all duration-200 origin-center" />
+        <span className="group-hover/feature:-translate-x-2 transition duration-200 inline-block text-white dark:text-white">
           {title}
         </span>
       </div>
-      <p className="text-sm text-yellow-700 dark:text-yellow-300 max-w-xs relative z-10 px-10">
+      <p className="text-sm text-white/80 dark:text-white/70 max-w-xs relative z-10 px-10">
         {description}
       </p>
     </div>

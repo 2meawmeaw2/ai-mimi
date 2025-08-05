@@ -311,9 +311,6 @@ const Program: React.FC = () => {
               انضم إلى آلاف الطلاب الذين تعلموا الذكاء الاصطناعي وغيروا مسارهم
               المهني
             </p>
-            <button className="bg-yellow text-black font-bold py-2.5 sm:py-3 md:py-4 px-4 sm:px-6 md:px-8 rounded-lg sm:rounded-xl hover:bg-yellow/90 transition-colors duration-300 text-sm sm:text-base w-full max-w-xs mx-auto">
-              سجل الآن واحصل على خصم 30%
-            </button>
           </div>
         </div>
       </div>

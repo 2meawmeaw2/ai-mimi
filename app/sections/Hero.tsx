@@ -24,9 +24,6 @@ const Hero = () => {
     gsap.set(".background-grid", {
       scale: 2,
     });
-    gsap.set(".para2", {
-      backgroundColor: "transparent",
-    });
 
     const introTl = gsap.timeline();
 
@@ -67,7 +64,6 @@ const Hero = () => {
       .to(
         ".para2",
         {
-          backgroundColor: "#dec531",
           duration: 1,
           ease: "power1.inOut",
         },
@@ -113,11 +109,10 @@ const Hero = () => {
         "-=1"
       )
       .to(split2.words, {
-        color: "black",
+        color: "white",
         duration: 0.1,
         stagger: {
           each: 0.03,
-          from: "end",
         },
         ease: "power1.inOut",
       });
@@ -134,25 +129,25 @@ const Hero = () => {
   });
 
   return (
-    <section id="Hero" className="fixed  top-0 h-[120vh] w-[100vw] ">
+    <section id="Hero" className="fixed  top-0 h-[120vh] w-[100vw] font-arabic">
       <div className="bg-black/50 absolute inset-0 z-50 w-full h-full black-overlay" />
 
       {/* Main text overlay - responsive positioning and sizing */}
       <div className="pointer-events-none absolute z-60 top-[10%] sm:top-[15%] lg:top-[20%] w-full h-full main-text px-4 sm:px-6 lg:px-8">
         {/* "وأخيرا" heading - responsive font sizes */}
-        <h2 className="overflow-clip text-center font-black py-2 sm:py-3 text-4xl sm:text-5xl md:text-6xl lg:text-7xl my-1 font-arabic">
+        <h2 className="overflow-clip text-center font-medium  sm:py-2 text-[5rem] sm:text-5xl md:text-6xl lg:text-7xl my-1 font-arabic">
           وأخيرا
         </h2>
 
         {/* Main AI course heading - responsive font sizes */}
-        <h1 className="overflow-clip ai text-center font-black text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-yellow font-arabic py-3 sm:py-4 lg:py-6">
+        <h1 className="overflow-clip ai  text-center font-black text-2xl sm:text-[2rem] md:text-[3rem] lg:text-[4rem] text-yellow font-arabic py-3 sm:py-4 lg:py-6">
           <ShinyText
-            text="AI دورة"
+            text="! دورة الذكاء الاصطناعي للجميع"
             disabled={false}
             speed={3}
             className="custom-class text-yellow/80"
           />
-          <div className="scale-x-0 origin-center line">
+          <div className="scale-x-0 origin-center  line">
             <div className="absolute translate-y-2 sm:translate-y-3 lg:translate-y-4 -translate-x-[5%] bottom-0 bg-gradient-to-r from-transparent via-yellow-300 to-transparent h-[2px] w-[120%] blur-sm" />
             <div className="absolute translate-y-2 sm:translate-y-3 lg:translate-y-4 -translate-x-[5%] bottom-0 bg-gradient-to-r from-transparent via-indigo-300 to-transparent h-px w-[120%]" />
             <div className="absolute translate-y-2 sm:translate-y-3 lg:translate-y-4 -translate-x-[5%] bottom-0 bg-gradient-to-r from-transparent via-yellow to-transparent h-[5px] w-[120%] blur-sm" />
@@ -174,15 +169,23 @@ const Hero = () => {
           />
 
           {/* Content section - responsive sizing and spacing */}
-          <div className="flex flex-col items-center justify-center gap-2 w-[95%] sm:w-[90%] max-w-[40rem] h-[60%] sm:h-[70%] mt-16 sm:mt-20 lg:mt-24">
+          <div className="flex flex-col items-center justify-center gap-2 w-[95%] sm:w-[90%] max-w-[40rem] h-[60%] sm:h-[70%] -mt-5 sm:mt-20 lg:mt-24">
             <div className="w-full h-20 sm:h-32 lg:h-40" />
             <div className="absolute z-50"></div>
 
             {/* Main paragraph - responsive text size and padding */}
-            <p className="overflow-clip para2 para text-center font-arabic text-lg sm:text-xl lg:text-2xl p-3 sm:p-4 lg:p-2 w-[100%] rounded-xl sm:rounded-2xl bg-yellow text-black/50 mt-6 sm:mt-8 lg:mt-10 border-2 border-black leading-relaxed">
-              ليمن: انا درتها لاصحاب المشاريع والفريلانسرز بصح تقدرو تشوفو
-              البرنامج بالاك تفيدكم انتما تاني
+            <p className=" text-white    bg-transparent text-center font-light font-arabic text-md  sm:text-xl lg:text-2xl p-3 sm:p-4 lg:p-2 w-[100%] rounded-xl sm:rounded-2xl  mt-6 sm:mt-8 lg:mt-10 border-2 border-black leading-relaxed">
+              فريلانسر؟ صانع محتوى؟ صاحب مشروع؟ طالب؟ ولا حتى فضولي تحب تفهم
+              كيفاش الذكاء الاصطناعي يقدر: يوفّرلك وقت , يسهّل خدمتك , ويزيدلك
+              دخل <br />
+              <b className="text-yellow"> هاد الدورة معمولة ليك.</b>
             </p>
+            <a
+              href="#Contact"
+              className="bg-yellow text-center text-black font-black py-2.5 sm:py-3 md:py-4 px-4 sm:px-6 md:px-8 rounded-lg sm:rounded-xl hover:bg-yellow/90 transition-colors duration-300 text-sm sm:text-base w-full max-w-xs mx-auto"
+            >
+              سجل الآن – الأماكن محدودة
+            </a>
           </div>
           <div className=" h-[20vh]  w-full" />
           {/* Bottom section - responsive spacing and sizes */}

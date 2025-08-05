@@ -1,13 +1,13 @@
 "use client";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Environment, Float } from "@react-three/drei";
 import { Robot } from "@/public/robot";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import Loader from "./Loading";
 
-// Type declarations
 interface PositionProxy {
   opacity: number;
   xPercent: number;
@@ -34,42 +34,29 @@ export function Scene(): React.JSX.Element {
   const [isMobileDevice, setIsMobileDevice] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Check if device is mobile - now properly handled for SSR
   useEffect(() => {
-    const checkMobile = (): boolean => {
-      return (
-        window.innerWidth <= 768 ||
-        /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-          navigator.userAgent
-        )
+    const checkMobile = (): boolean =>
+      window.innerWidth <= 768 ||
+      /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
       );
-    };
+
+    const handleResize = (): void => setIsMobileDevice(checkMobile());
 
     setIsMobileDevice(checkMobile());
-
-    // Optional: Update on resize
-    const handleResize = (): void => {
-      setIsMobileDevice(checkMobile());
-    };
-
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Helper function to set will-change optimization
   const setWillChange = (
     element: HTMLElement | null,
     properties: string
   ): void => {
-    if (element && isMobileDevice) {
-      element.style.willChange = properties;
-    }
+    if (element && isMobileDevice) element.style.willChange = properties;
   };
 
   const removeWillChange = (element: HTMLElement | null): void => {
-    if (element && isMobileDevice) {
-      element.style.willChange = "auto";
-    }
+    if (element && isMobileDevice) element.style.willChange = "auto";
   };
 
   useGSAP(() => {
@@ -81,381 +68,191 @@ export function Scene(): React.JSX.Element {
       yPercent: 0,
     };
 
-    // Set will-change for the container element at the start
-    if (containerRef.current) {
-      setWillChange(containerRef.current, "transform, opacity");
+    const applyProps = (): void => {
+      if (containerRef.current) {
+        gsap.set(containerRef.current, {
+          opacity: positionProxy.opacity,
+          xPercent: positionProxy.xPercent,
+          yPercent: positionProxy.yPercent,
+        });
+      }
+      setRotation([rotationProxy.x, rotationProxy.y, rotationProxy.z]);
+    };
+
+    const allTimelines = [
+      {
+        trigger: "#Who",
+        start: "-140% center",
+        end: "160% center",
+        steps: [
+          {
+            duration: 1,
+            xPercent: 50,
+            yPercent: -10,
+            x: 0,
+            y: -7,
+            z: 0,
+            opacity: 0,
+          },
+          {
+            duration: 2,
+            xPercent: -25,
+            yPercent: -50,
+            x: 0,
+            y: 0.25 * Math.PI,
+            z: -0.25 * Math.PI,
+            opacity: 1,
+          },
+        ],
+      },
+      {
+        trigger: "#Program",
+        start: "-10% center",
+        end: "90% center",
+        steps: [
+          {
+            xPercent: -40,
+            yPercent: 10,
+            x: 0,
+            y: Math.PI * 2 + Math.PI / 4,
+            z: 0,
+            opacity: isMobileDevice ? 0.4 : 1,
+          },
+          {
+            xPercent: 40,
+            yPercent: -40,
+            x: Math.PI * 2,
+            y: Math.PI * 2 - Math.PI / 4,
+            z: Math.PI,
+            opacity: 1,
+          },
+          {
+            xPercent: -40,
+            yPercent: -40,
+            x: 0,
+            y: Math.PI * 2 + Math.PI / 3.4,
+            z: Math.PI * 2 + Math.PI / 6,
+            opacity: 1,
+          },
+        ],
+      },
+      {
+        trigger: "#Win",
+        start: "top center",
+        end: "90% center",
+        steps: [
+          {
+            xPercent: -30,
+            x: Math.PI,
+            y: -Math.PI * 5,
+            z: Math.PI * 2,
+            opacity: 1,
+          },
+        ],
+      },
+      {
+        trigger: "#Contact",
+        start: "top center",
+        end: "60% center",
+        steps: [
+          {
+            xPercent: -35, // smooth continuation
+            yPercent: isMobileDevice ? 0 : -10, // slight vertical motion
+            x: Math.PI / 2, // 90° — laying on back
+            y: -Math.PI * 5.2, // turn head the opposite way
+            z: Math.PI * 1.85, // reverse head tilt
+            opacity: 1,
+          },
+        ],
+      },
+    ];
+
+    for (const section of allTimelines) {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          markers: section.trigger === "#Who" ? true : false,
+
+          trigger: section.trigger,
+          start: section.start,
+          end: section.end,
+          scrub: 1,
+          refreshPriority: -1,
+        },
+        onStart: () =>
+          setWillChange(containerRef.current, "transform, opacity"),
+      });
+
+      for (const step of section.steps) {
+        tl.to([positionProxy, rotationProxy], {
+          ...step,
+          duration: 1.5,
+          ease: "power2.inOut",
+          onUpdate: applyProps,
+        });
+      }
     }
 
-    // Breathing animation for the robot
     gsap.to(scaleProxy, {
       value: 1.1,
       duration: 2,
       ease: "power2.inOut",
       yoyo: true,
       repeat: -1,
-      onStart: (): void => {
-        // Will-change is already set above for the entire animation sequence
-      },
-      onUpdate: (): void => setBoxSize(scaleProxy.value),
+      onUpdate: () => setBoxSize(scaleProxy.value),
     });
 
-    // Create a timeline for better control
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#Who",
-        start: "-120% center",
-        end: "160% center",
-
-        scrub: 1,
-        refreshPriority: -1,
-      },
-      onComplete: (): void => {
-        // Remove will-change when this scroll section is complete
-        // Note: We'll keep it since other animations might still be running
-      },
-      onStart: (): void => {
-        // Ensure will-change is set when scroll animation starts
-        if (containerRef.current) {
-          setWillChange(containerRef.current, "transform, opacity");
-        }
-      },
-    });
-
-    // First scroll section - entrance
-    tl.to([positionProxy, rotationProxy], {
-      xPercent: 50,
-      yPercent: -10,
-      x: 0,
-      y: -7,
-      duration: 1,
-      z: 0,
-      ease: "power2.out",
-      onUpdate: (): void => {
-        if (containerRef.current) {
-          gsap.set(containerRef.current, {
-            opacity: positionProxy.opacity,
-            xPercent: positionProxy.xPercent,
-            yPercent: positionProxy.yPercent,
-          });
-        }
-        setRotation([
-          rotationProxy.x,
-          rotationProxy.y,
-          rotationProxy.z,
-        ] as RotationTuple);
-      },
-    })
-      .to(
-        [positionProxy, rotationProxy],
-        {
-          duration: 1,
-          opacity: 0,
-          ease: "power2.out",
-          onUpdate: (): void => {
-            if (containerRef.current) {
-              gsap.set(containerRef.current, {
-                opacity: positionProxy.opacity,
-              });
-            }
-          },
-        },
-        0
-      )
-
-      // Second scroll section - middle
-      .to([positionProxy, rotationProxy], {
-        duration: 2,
-        opacity: 1,
-        xPercent: -25,
-        yPercent: -50,
-        x: 0,
-        y: 0.25 * Math.PI,
-        z: -0.25 * Math.PI,
-        ease: "power2.inOut",
-        onUpdate: (): void => {
-          if (containerRef.current) {
-            gsap.set(containerRef.current, {
-              opacity: positionProxy.opacity,
-              xPercent: positionProxy.xPercent,
-              yPercent: positionProxy.yPercent,
-            });
-          }
-          setRotation([
-            rotationProxy.x,
-            rotationProxy.y,
-            rotationProxy.z,
-          ] as RotationTuple);
-        },
-      });
-
-    const ProgramTl = gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: "#Program",
-          start: "-10% center",
-          end: "90% center",
-
-          scrub: 1.5,
-          refreshPriority: -1,
-        },
-        onComplete: (): void => {
-          // Remove will-change when this scroll section is complete
-          // Note: We'll keep it since other animations might still be running
-        },
-        onStart: (): void => {
-          // Ensure will-change is set when scroll animation starts
-          if (containerRef.current) {
-            setWillChange(containerRef.current, "transform, opacity");
-          }
-        },
-      })
-      .to([positionProxy, rotationProxy], {
-        opacity: 0.4,
-        xPercent: -40,
-        yPercent: 10,
-        duration: 1.25,
-        x: 0,
-        y: Math.PI * 2 + Math.PI / 4,
-        z: 0,
-        ease: "power2.out",
-        onUpdate: (): void => {
-          if (containerRef.current) {
-            gsap.set(containerRef.current, {
-              opacity: positionProxy.opacity,
-              xPercent: positionProxy.xPercent,
-              yPercent: positionProxy.yPercent,
-            });
-          }
-          setRotation([
-            rotationProxy.x,
-            rotationProxy.y,
-            rotationProxy.z,
-          ] as RotationTuple);
-        },
-      })
-      .to([positionProxy, rotationProxy], {
-        opacity: 1,
-        xPercent: 40,
-        yPercent: -40,
-        duration: 2,
-        x: Math.PI * 2,
-        y: Math.PI * 2 + -Math.PI / 4,
-        z: Math.PI,
-        ease: "power2.out",
-        onUpdate: (): void => {
-          if (containerRef.current) {
-            gsap.set(containerRef.current, {
-              opacity: positionProxy.opacity,
-              xPercent: positionProxy.xPercent,
-              yPercent: positionProxy.yPercent,
-            });
-          }
-          setRotation([
-            rotationProxy.x,
-            rotationProxy.y,
-            rotationProxy.z,
-          ] as RotationTuple);
-        },
-      })
-      .to([positionProxy, rotationProxy], {
-        xPercent: -40,
-        yPercent: -40,
-        opacity: 0.7,
-        duration: 2,
-        x: 0,
-        y: Math.PI * 2 + +Math.PI / 3.4,
-        z: Math.PI * 2 + Math.PI / 6,
-        ease: "power2.out",
-        onUpdate: (): void => {
-          if (containerRef.current) {
-            gsap.set(containerRef.current, {
-              opacity: positionProxy.opacity,
-              xPercent: positionProxy.xPercent,
-              yPercent: positionProxy.yPercent,
-            });
-          }
-          setRotation([
-            rotationProxy.x,
-            rotationProxy.y,
-            rotationProxy.z,
-          ] as RotationTuple);
-        },
-      });
-    // Third scroll section - separate timeline for Win section
-    const winTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#Win",
-        start: "top center",
-        end: "90% center",
-        scrub: 1,
-        markers: true,
-
-        refreshPriority: -1,
-      },
-      onStart: (): void => {
-        // Ensure will-change is still active for this section
-        if (containerRef.current) {
-          setWillChange(containerRef.current, "transform, opacity");
-        }
-      },
-    });
-
-    winTimeline
-      .to([positionProxy, rotationProxy], {
-        xPercent: -20,
-        opacity: 0.6,
-        duration: 1.5,
-        x: Math.PI,
-        y: Math.PI * 2,
-        z: Math.PI * 2,
-        ease: "power2.inOut",
-        onUpdate: (): void => {
-          if (containerRef.current) {
-            gsap.set(containerRef.current, {
-              opacity: positionProxy.opacity,
-
-              xPercent: positionProxy.xPercent,
-              yPercent: positionProxy.yPercent,
-            });
-          }
-          setRotation([
-            rotationProxy.x,
-            rotationProxy.y,
-            rotationProxy.z,
-          ] as RotationTuple);
-        },
-      })
-
-      .to([positionProxy, rotationProxy], {
-        opacity: 1,
-        duration: 1,
-        xPercent: -30,
-        x: Math.PI,
-        y: Math.PI,
-        z: Math.PI * 2,
-        ease: "power2.inOut",
-        onUpdate: (): void => {
-          if (containerRef.current) {
-            gsap.set(containerRef.current, {
-              opacity: positionProxy.opacity,
-              xPercent: positionProxy.xPercent,
-              yPercent: positionProxy.yPercent,
-            });
-          }
-          setRotation([
-            rotationProxy.x,
-            rotationProxy.y,
-            rotationProxy.z,
-          ] as RotationTuple);
-        },
-      });
-
-    const lastTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#Contact",
-        start: "top center",
-        end: "bottom bottom",
-        markers: true,
-        scrub: 1.2,
-        refreshPriority: -1,
-      },
-      onStart: (): void => {
-        // Ensure will-change is still active for this section
-        if (containerRef.current) {
-          setWillChange(containerRef.current, "transform, opacity");
-        }
-      },
-    });
-
-    lastTimeline.to([positionProxy, rotationProxy], {
-      xPercent: -20,
-      yPercent: isMobileDevice ? -10 : -8,
-      x: -Math.PI / 3,
-      y: 0,
-      z: Math.PI / 2,
-      ease: "power2.inOut",
-      onUpdate: (): void => {
-        if (containerRef.current) {
-          gsap.set(containerRef.current, {
-            opacity: positionProxy.opacity,
-            xPercent: positionProxy.xPercent,
-            yPercent: positionProxy.yPercent,
-          });
-        }
-        setRotation([
-          rotationProxy.x,
-          rotationProxy.y,
-          rotationProxy.z,
-        ] as RotationTuple);
-      },
-    });
-
-    // Cleanup function
-    return (): void => {
-      // Remove will-change when component unmounts or animations are cleaned up
-      if (containerRef.current) {
-        removeWillChange(containerRef.current);
-      }
+    return () => {
+      removeWillChange(containerRef.current);
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
-  }, [isMobileDevice]); // Add isMobileDevice as dependency
+  }, [isMobileDevice]);
 
-  // Additional mobile optimization: Reduce motion for users who prefer it
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const prefersReducedMotion: boolean = window.matchMedia(
+      const reducedMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)"
       ).matches;
-
-      if (prefersReducedMotion) {
-        // Optionally disable or reduce animations for accessibility
-        gsap.globalTimeline.timeScale(0.1); // Slow down all animations
-      }
+      if (reducedMotion) gsap.globalTimeline.timeScale(0.1);
     }
   }, []);
 
   return (
-    <div
-      ref={containerRef}
-      className="fixed bottom-0 z-60 h-[50vh]  w-full pointer-events-none"
-      style={{
-        // Set initial will-change in CSS for better performance on first load
-        willChange: isMobileDevice ? "transform, opacity" : "auto",
-      }}
-    >
-      <Canvas
-        camera={{ fov: 75 }}
-        // Performance optimizations for mobile
-        performance={{
-          min: 0.1, // Lower minimum performance threshold
-          max: 1, // Maximum performance threshold
-          debounce: 200, // Debounce resize events
-        }}
-        // Reduce pixel ratio on mobile for better performance
-        dpr={
-          typeof window !== "undefined"
-            ? isMobileDevice
-              ? Math.min(window.devicePixelRatio, 2)
-              : window.devicePixelRatio
-            : 1 // Default value for SSR
-        }
-        gl={{ preserveDrawingBuffer: true }}
-        style={{ pointerEvents: "none" }}
+    <>
+      {" "}
+      <div
+        ref={containerRef}
+        className="fixed bottom-0 z-60 h-[50vh] w-full pointer-events-none"
+        style={{ willChange: isMobileDevice ? "transform, opacity" : "auto" }}
       >
-        <group scale={0.03} rotation={[rotation[0], rotation[1], rotation[2]]}>
-          <ambientLight intensity={0.4} />
-          <directionalLight position={[5, 5, 5]} intensity={1} />
-          <Environment preset="sunset" />
-          <Float
-            speed={isMobileDevice ? 1 : 2} // Reduce float speed on mobile
-            rotationIntensity={isMobileDevice ? 1 : 2} // Reduce rotation intensity on mobile
-            floatIntensity={2} // Reduce float intensity on mobile
-            floatingRange={[-1, 1]}
-          >
-            <Robot boxSize={boxSize} />
-          </Float>
-        </group>
-      </Canvas>
-    </div>
+        <Canvas
+          camera={{ fov: 75 }}
+          performance={{ min: 0.1, max: 1, debounce: 200 }}
+          dpr={
+            typeof window !== "undefined"
+              ? Math.min(window.devicePixelRatio, isMobileDevice ? 2 : 3)
+              : 1
+          }
+          gl={{ preserveDrawingBuffer: true }}
+          style={{ pointerEvents: "none" }}
+        >
+          <group scale={0.03} rotation={rotation}>
+            <ambientLight intensity={0.4} />
+            <directionalLight position={[5, 5, 5]} intensity={1} />
+            <Environment preset="sunset" />
+            <Float
+              speed={isMobileDevice ? 1 : 2}
+              rotationIntensity={1}
+              floatIntensity={1}
+              floatingRange={[-2, 2]}
+            >
+              <Suspense>
+                <Robot boxSize={boxSize} />
+              </Suspense>
+            </Float>
+          </group>
+        </Canvas>
+      </div>
+      <Loader />
+    </>
   );
 }

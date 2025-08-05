@@ -5,7 +5,9 @@ html,
 body {
   overflow-x: hidden;
   width: 100vw;
+  scroll-behavior: smooth;
 }
+
 :root {
   --white: #ffffff;
   --font-arabic: var(--font-cairo);
@@ -132,5 +134,27 @@ body {
   100% {
     opacity: 1;
     transform: translate(-50%, -40%) scale(1);
+  }
+}
+
+/*loading*/
+@keyframes spinner-rotate {
+  0% {
+    transform: rotateY(0deg);
+  }
+  50%,
+  80% {
+    transform: rotateY(-180deg);
+  }
+  90%,
+  100% {
+    opacity: 0;
+    transform: rotateY(-180deg);
+  }
+}
+
+@layer utilities {
+  .animate-spinner {
+    animation: spinner-rotate 2s infinite;
   }
 }

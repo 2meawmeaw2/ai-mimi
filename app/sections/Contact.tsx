@@ -18,16 +18,34 @@ const Contact = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Submitted Data:", formData);
-    setIsSubmitted(true);
+    setIsSubmitted(false);
 
-    // Reset form after submission
-    setFormData({ name: "", email: "", number: "", message: "" });
+    try {
+      const response = await fetch("/api/email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.number,
+          message: formData.message,
+        }),
+      });
 
-    // Hide success message after 5 seconds
-    setTimeout(() => setIsSubmitted(false), 5000);
+      if (response.ok) {
+        setIsSubmitted(true);
+        setFormData({ name: "", email: "", number: "", message: "" });
+      } else {
+        const err = await response.json();
+        console.error("Email sending failed:", err);
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
   };
 
   return (
@@ -44,7 +62,7 @@ const Contact = () => {
               سجل في الدورة الآن
             </h2>
             {isSubmitted && (
-              <div className="mb-6 p-4 bg-green-900/30 border border-green-500 rounded-lg text-green-300 flex items-center gap-2">
+              <div className="mb-6 p-4  bg-green-900/30 border border-green-500 rounded-lg text-green-300 flex justify-end items-center gap-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6"
