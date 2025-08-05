@@ -170,8 +170,6 @@ export function Scene(): React.JSX.Element {
     for (const section of allTimelines) {
       const tl = gsap.timeline({
         scrollTrigger: {
-          markers: section.trigger === "#Who" ? true : false,
-
           trigger: section.trigger,
           start: section.start,
           end: section.end,
@@ -215,7 +213,6 @@ export function Scene(): React.JSX.Element {
       if (reducedMotion) gsap.globalTimeline.timeScale(0.1);
     }
   }, []);
-
   return (
     <>
       {" "}
