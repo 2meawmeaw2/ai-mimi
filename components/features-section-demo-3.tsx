@@ -21,14 +21,14 @@ export default function WorkShowcase() {
 
   const projects: Project[] = [
     {
-      title: "بوت التدبر",
-      description: "خدمت بوت يساعد الناس يتدبروا القرآن بطريقة ذكية وبسيطة.",
-      image: "/projects/1.jpg",
-    },
-    {
       title: "صناعة المحتوى",
       description: "نكتب، نصمّم وننشر محتوى احترافي في وقت قياسي.",
       image: "/projects/2.jpg",
+    },
+    {
+      title: "بوت التدبر",
+      description: "خدمت بوت يساعد الناس يتدبروا القرآن بطريقة ذكية وبسيطة.",
+      image: "/projects/1.jpg",
     },
     {
       title: "دليل تسويقي للمدارس القرآنية",
@@ -141,7 +141,7 @@ export default function WorkShowcase() {
           ease: "none",
           repeat: -1,
           modifiers: {
-            x: gsap.utils.unitize(gsap.utils.wrap(-totalWidth, 0)), // keep wrapping in px
+            x: gsap.utils.unitize(gsap.utils.wrap(-totalWidth, 0)),
           },
         });
       });
@@ -167,7 +167,7 @@ export default function WorkShowcase() {
 
       <div
         ref={containerRef}
-        className="overflow-hidden lg:overflow-x-hidden no-scrollbar px-4"
+        className="overflow-x-auto lg:overflow-hidden no-scrollbar px-4"
       >
         <div className="flex mx-auto gap-6 w-max pl-4 pr-8" ref={scrollWrapRef}>
           {[...projects, ...projects].map((proj, index) => (
