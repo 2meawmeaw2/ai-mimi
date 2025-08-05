@@ -190,15 +190,6 @@ export function Scene(): React.JSX.Element {
       }
     }
 
-    gsap.to(scaleProxy, {
-      value: 1.1,
-      duration: 2,
-      ease: "power2.inOut",
-      yoyo: true,
-      repeat: -1,
-      onUpdate: () => setBoxSize(scaleProxy.value),
-    });
-
     return () => {
       removeWillChange(containerRef.current);
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
@@ -237,10 +228,10 @@ export function Scene(): React.JSX.Element {
             <directionalLight position={[5, 5, 5]} intensity={1} />
             <Environment preset="sunset" />
             <Float
-              speed={isMobileDevice ? 0 : 2}
-              rotationIntensity={isMobileDevice ? 0 : 1}
-              floatIntensity={isMobileDevice ? 0 : 1}
-              floatingRange={isMobileDevice ? [0, 0] : [-2, 2]}
+              speed={isMobileDevice ? 2 : 2}
+              rotationIntensity={isMobileDevice ? 2 : 1}
+              floatIntensity={isMobileDevice ? 2 : 1}
+              floatingRange={isMobileDevice ? [-0.6, 0.6] : [-2, 2]}
             >
               <Suspense>
                 <Robot boxSize={boxSize} />
