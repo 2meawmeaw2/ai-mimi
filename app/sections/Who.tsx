@@ -224,7 +224,7 @@ const Who: React.FC = () => {
       >
         <h1
           ref={titleRef}
-          className="text-4xl md:text-5xl font-bold text-yellow text-center drop-shadow-[0_2px_4px_rgba(234,179,8,0.5)] perspective-1000"
+          className="text-3xl sm:text-4xl md:text-5xl font-bold text-yellow text-center drop-shadow-[0_2px_4px_rgba(234,179,8,0.5)] perspective-1000"
         >
           من عندمن راح تتعلم ؟
         </h1>

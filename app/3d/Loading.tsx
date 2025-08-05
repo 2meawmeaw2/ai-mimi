@@ -6,6 +6,15 @@ const Loader = () => {
   const { progress } = useProgress();
   const [visible, setVisible] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
+  const [showWarning, setShowWarning] = useState(false);
+
+  useEffect(() => {
+    const warningTimeout = setTimeout(() => {
+      if (progress < 100) setShowWarning(true);
+    }, 10000); // 10 seconds
+
+    return () => clearTimeout(warningTimeout);
+  }, [progress]);
 
   useEffect(() => {
     if (progress >= 100) {
@@ -35,6 +44,11 @@ const Loader = () => {
         ))}
       </div>
       <p className="text-sm font-mono tracking-wide">{Math.floor(progress)}%</p>
+      {showWarning && (
+        <p className="text-xs text-red-500 mt-2 font-mono">
+          اذا طولت المشكل في الانترنت تاعك مشي فينا
+        </p>
+      )}
     </div>
   );
 };
