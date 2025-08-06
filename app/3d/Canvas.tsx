@@ -29,7 +29,6 @@ type RotationTuple = [number, number, number];
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export function Scene(): React.JSX.Element {
-  const [boxSize, setBoxSize] = useState<number>(1);
   const [rotation, setRotation] = useState<RotationTuple>([0, 0, 0]);
   const [isMobileDevice, setIsMobileDevice] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -60,7 +59,6 @@ export function Scene(): React.JSX.Element {
   };
 
   useGSAP(() => {
-    const scaleProxy: ScaleProxy = { value: 1 };
     const rotationProxy: RotationProxy = { x: 0, y: 0, z: 0 };
     const positionProxy: PositionProxy = {
       opacity: 1,
@@ -82,13 +80,13 @@ export function Scene(): React.JSX.Element {
     const allTimelines = [
       {
         trigger: "#Who",
-        start: "-140% center",
+        start: "-160% center",
         end: "160% center",
         steps: [
           {
             duration: 1,
             xPercent: 50,
-            yPercent: -10,
+            yPercent: -20,
             x: 0,
             y: -7,
             z: 0,
@@ -97,7 +95,7 @@ export function Scene(): React.JSX.Element {
           {
             duration: 2,
             xPercent: -25,
-            yPercent: -50,
+            yPercent: -60,
             x: 0,
             y: 0.25 * Math.PI,
             z: -0.25 * Math.PI,
@@ -112,7 +110,7 @@ export function Scene(): React.JSX.Element {
         steps: [
           {
             xPercent: -40,
-            yPercent: 10,
+            yPercent: 0,
             x: 0,
             y: Math.PI * 2 + Math.PI / 4,
             z: 0,
@@ -120,7 +118,7 @@ export function Scene(): React.JSX.Element {
           },
           {
             xPercent: 40,
-            yPercent: -40,
+            yPercent: -50,
             x: Math.PI * 2,
             y: Math.PI * 2 - Math.PI / 4,
             z: Math.PI,
@@ -128,7 +126,7 @@ export function Scene(): React.JSX.Element {
           },
           {
             xPercent: -40,
-            yPercent: -40,
+            yPercent: -50,
             x: 0,
             y: Math.PI * 2 + Math.PI / 3.4,
             z: Math.PI * 2 + Math.PI / 6,
@@ -157,7 +155,7 @@ export function Scene(): React.JSX.Element {
         steps: [
           {
             xPercent: -35, // smooth continuation
-            yPercent: isMobileDevice ? 0 : -10, // slight vertical motion
+            yPercent: isMobileDevice ? -10 : -20, // slight vertical motion
             x: Math.PI / 2, // 90° — laying on back
             y: -Math.PI * 5.2, // turn head the opposite way
             z: Math.PI * 1.85, // reverse head tilt
@@ -209,7 +207,7 @@ export function Scene(): React.JSX.Element {
       {" "}
       <div
         ref={containerRef}
-        className="fixed bottom-0 z-60 h-[50vh] w-full pointer-events-none"
+        className="fixed -bottom-20 z-60 h-[50dvh] w-full pointer-events-none"
         style={{ willChange: isMobileDevice ? "transform, opacity" : "auto" }}
       >
         <Canvas
@@ -234,7 +232,7 @@ export function Scene(): React.JSX.Element {
               floatingRange={isMobileDevice ? [-0.6, 0.6] : [-2, 2]}
             >
               <Suspense>
-                <Robot boxSize={boxSize} />
+                <Robot boxSize={1} />
               </Suspense>
             </Float>
           </group>

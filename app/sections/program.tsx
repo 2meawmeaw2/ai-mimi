@@ -87,15 +87,6 @@ const Program: React.FC = () => {
     },
   ];
 
-  const totalWeeks = courseModules.reduce((sum, module) => {
-    return sum + parseInt(module.duration.split(" ")[0]);
-  }, 0);
-
-  const totalLessons = courseModules.reduce(
-    (sum, module) => sum + module.lessons,
-    0
-  );
-
   return (
     <section
       id="Program"

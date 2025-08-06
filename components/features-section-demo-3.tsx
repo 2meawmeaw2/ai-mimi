@@ -2,12 +2,10 @@
 
 import React, { useRef, useEffect } from "react";
 import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import Image from "next/image";
-
-gsap.registerPlugin(ScrollTrigger);
-
+import ScrollTrigger from "gsap/ScrollTrigger";
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 interface Project {
   title: string;
   description: string;
@@ -15,8 +13,6 @@ interface Project {
 }
 
 export default function WorkShowcase() {
-  const titleRef = useRef<HTMLHeadingElement | null>(null);
-  const containerRef = useRef<HTMLDivElement | null>(null);
   const scrollWrapRef = useRef<HTMLDivElement | null>(null);
 
   const projects: Project[] = [
@@ -77,28 +73,6 @@ export default function WorkShowcase() {
   ];
 
   useGSAP(() => {
-    gsap.fromTo(
-      ".scroll-card",
-      {
-        opacity: 0,
-        y: 40,
-        scale: 0.9,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 1.2,
-        stagger: 0.2,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 85%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-
     let ctx: gsap.Context | undefined;
 
     if (window.innerWidth >= 1024) {
@@ -131,17 +105,11 @@ export default function WorkShowcase() {
 
   return (
     <section className="w-full py-20 mt-20 z-60 font-arabic relative">
-      <h2
-        ref={titleRef}
-        className="text-4xl md:text-5xl font-bold text-yellow text-center mb-12 drop-shadow-[0_2px_4px_rgba(234,179,8,0.5)]"
-      >
+      <h2 className="text-4xl md:text-5xl font-bold text-yellow text-center mb-12 drop-shadow-[0_2px_4px_rgba(234,179,8,0.5)]">
         وش قدرت ندير بفضل الذكاء الاصطناعي؟
       </h2>
 
-      <div
-        ref={containerRef}
-        className="overflow-x-auto lg:overflow-hidden no-scrollbar px-4"
-      >
+      <div className="overflow-x-auto lg:overflow-hidden no-scrollbar px-4">
         <div className="flex mx-auto gap-6 w-max pl-4 pr-8" ref={scrollWrapRef}>
           {[...projects, ...projects].map((proj, index) => (
             <div
