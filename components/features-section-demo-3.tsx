@@ -78,33 +78,6 @@ export default function WorkShowcase() {
 
   useGSAP(() => {
     gsap.fromTo(
-      titleRef.current,
-      { opacity: 0, y: 80, rotationX: -60, scale: 0.8 },
-      {
-        opacity: 1,
-        y: 0,
-        rotationX: 0,
-        scale: 1,
-        duration: 1.2,
-        ease: "back.out(1.7)",
-        scrollTrigger: {
-          trigger: titleRef.current,
-          start: "top 90%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-
-    gsap.to(titleRef.current, {
-      textShadow:
-        "0 0 20px rgba(234,179,8,0.8), 0 0 40px rgba(234,179,8,0.6), 0 0 60px rgba(234,179,8,0.4)",
-      duration: 2,
-      repeat: -1,
-      yoyo: true,
-      ease: "power2.inOut",
-    });
-
-    gsap.fromTo(
       ".scroll-card",
       {
         opacity: 0,

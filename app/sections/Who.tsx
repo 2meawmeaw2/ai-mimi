@@ -25,75 +25,8 @@ const Who: React.FC = () => {
     });
 
     // Title animation - entire title appears with dramatic effect
-    if (titleRef.current) {
-      gsap.fromTo(
-        titleRef.current,
-        {
-          opacity: 0,
-          y: 100,
-          rotationX: -90,
-          scale: 0.5,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          rotationX: 0,
-          scale: 1,
-          duration: 1.2,
-          ease: "back.out(1.7)",
-          scrollTrigger: {
-            trigger: titleRef.current,
-            start: "top 80%",
-            end: "bottom 20%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-
-      // Continuous glow pulse for title
-      gsap.to(titleRef.current, {
-        textShadow:
-          "0 0 20px rgba(234,179,8,0.8), 0 0 40px rgba(234,179,8,0.6), 0 0 60px rgba(234,179,8,0.4)",
-        duration: 2,
-        yoyo: true,
-        repeat: -1,
-        ease: "power2.inOut",
-      });
-    }
 
     // Container slide up animation
-    if (containerRef.current) {
-      gsap.fromTo(
-        containerRef.current,
-        {
-          y: 100,
-          opacity: 0,
-          scale: 0.9,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 1.2,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 85%",
-            end: "bottom 15%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-
-      // Floating animation for the container
-      gsap.to(containerRef.current, {
-        y: -10,
-        duration: 3,
-        yoyo: true,
-        repeat: 2,
-        ease: "power2.inOut",
-      });
-    }
 
     // Paragraph text reveal animation - word by word
     if (paragraphRef.current) {
