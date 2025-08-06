@@ -168,6 +168,46 @@ export function Scene(): React.JSX.Element {
         ],
       },
     ];
+    gsap.set(containerRef.current, { autoAlpha: 0 });
+    setRotation([Math.PI * 2, Math.PI * 2, Math.PI * 2]); // start from 360° on all axes
+
+    // Fade in container DOM
+    gsap.fromTo(
+      containerRef.current,
+      { autoAlpha: 0, y: 50 },
+      {
+        autoAlpha: 1,
+        y: 0,
+        duration: 1,
+        ease: "power2.out",
+        delay: 0.2,
+      }
+    );
+
+    // 3D tumble + roll-in on the 3D model
+    gsap.fromTo(
+      [positionProxy, rotationProxy],
+      {
+        xPercent: -100,
+        yPercent: 20,
+        opacity: 0,
+        x: Math.PI, // full spin X
+        y: Math.PI, // full spin Y
+        z: Math.PI, // full spin Z
+      },
+      {
+        xPercent: 0,
+        yPercent: 0,
+        opacity: 1,
+        x: 0,
+        y: 0,
+        z: 0,
+        duration: 4,
+        ease: "power4.out",
+        delay: 1.5,
+        onUpdate: applyProps,
+      }
+    );
 
     for (const section of allTimelines) {
       const tl = gsap.timeline({

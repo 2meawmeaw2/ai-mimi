@@ -153,7 +153,7 @@ const Hero = () => {
 
         {/* Main content container */}
         <div
-          className={`absolute ${height < 667 ? "top-[30%]" : "top-[35%]"}  w-full  flex flex-col justify-evenly items-center px-4 sm:px-6 lg:px-8`}
+          className={`absolute ${height < 667 ? "top-[30%]" : "top-[35%] lg:top-[25%]"}  w-full  flex flex-col justify-evenly items-center px-4 sm:px-6 lg:px-8`}
         >
           {/* Spotlight - responsive positioning */}
           <Spotlight
