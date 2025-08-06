@@ -97,6 +97,7 @@ const Hero = () => {
         trigger: "#Hero",
         start: "10% top",
         end: "50% top",
+        refreshPriority: 2,
       },
     });
   });
