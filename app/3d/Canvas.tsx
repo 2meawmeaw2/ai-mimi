@@ -157,7 +157,7 @@ export function Scene(): React.JSX.Element {
             xPercent: -35, // smooth continuation
             yPercent: isMobileDevice ? -10 : -20, // slight vertical motion
             x: Math.PI / 2, // 90° — laying on back
-            y: -Math.PI * 5.2, // turn head the opposite way
+            y: -Math.PI * 3.2, // turn head the opposite way
             z: Math.PI * 1.85, // reverse head tilt
             opacity: 1,
           },
@@ -168,6 +168,8 @@ export function Scene(): React.JSX.Element {
     for (const section of allTimelines) {
       const tl = gsap.timeline({
         scrollTrigger: {
+          invalidateOnRefresh: true,
+
           trigger: section.trigger,
           start: section.start,
           end: section.end,
@@ -193,14 +195,26 @@ export function Scene(): React.JSX.Element {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, [isMobileDevice]);
+  const useWindowWidth = () => {
+    const [width, setWidth] = useState(
+      typeof window !== "undefined" ? window.innerWidth : 0
+    );
 
+    useEffect(() => {
+      const handleResize = () => setWidth(window.innerWidth);
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    return width;
+  };
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const reducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-      ).matches;
-      if (reducedMotion) gsap.globalTimeline.timeScale(0.1);
-    }
+    if (typeof window === "undefined") return;
+
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (reducedMotion) gsap.globalTimeline.timeScale(0.1);
   }, []);
   return (
     <>
@@ -232,7 +246,7 @@ export function Scene(): React.JSX.Element {
               floatingRange={isMobileDevice ? [-0.6, 0.6] : [-2, 2]}
             >
               <Suspense>
-                <Robot boxSize={1} />
+                <Robot boxSize={useWindowWidth() > 1024 ? 1.4 : 1} />
               </Suspense>
             </Float>
           </group>

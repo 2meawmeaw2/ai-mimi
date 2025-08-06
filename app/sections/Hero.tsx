@@ -12,13 +12,6 @@ const Hero = () => {
     document.body.classList.add("overflow-y-clip");
     document.body.classList.add("h-[100vh]");
 
-    const split = SplitText.create(".para", {
-      type: "lines",
-    });
-    const split2 = SplitText.create(".para2", {
-      type: "words",
-    });
-
     gsap.set(".hero", {
       clipPath: "polygon(50% 0%, 50% 0%, 50% 100%, 50% 100%)",
     });
@@ -95,35 +88,15 @@ const Hero = () => {
           ease: "power1.inOut",
         },
         "-=1"
-      )
-      .from(
-        split.lines,
-        {
-          autoAlpha: 0,
-          yPercent: 100,
-          stagger: {
-            each: 0.05,
-          },
-          ease: "power1.inOut",
-        },
-        "-=1"
-      )
-      .to(split2.words, {
-        color: "white",
-        duration: 0.1,
-        stagger: {
-          each: 0.03,
-        },
-        ease: "power1.inOut",
-      });
+      );
 
     gsap.to("#Hero", {
       autoAlpha: 0,
       scrollTrigger: {
         scrub: 1,
         trigger: "#Hero",
-        start: "20% top",
-        end: "60% top",
+        start: "10% top",
+        end: "50% top",
       },
     });
   });
