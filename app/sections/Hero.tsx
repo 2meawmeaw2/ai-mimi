@@ -1,5 +1,6 @@
 "use client";
 import { Spotlight } from "@/components/ui/spotlight";
+import { useState, useEffect } from "react";
 import ShinyText from "../ShinyText/ShinyText";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -101,17 +102,29 @@ const Hero = () => {
       },
     });
   });
+  const [height, setHeight] = useState<number>(0);
+
+  useEffect(() => {
+    const updateHeight = () => setHeight(window.innerHeight);
+
+    updateHeight(); // Set initial height
+    window.addEventListener("resize", updateHeight);
+
+    return () => window.removeEventListener("resize", updateHeight);
+  }, []);
 
   return (
     <section
       id="Hero"
-      className="fixed z-60 top-0 h-[120dvh] w-[100vw] font-arabic"
+      className="fixed z-60  top-0 h-[120dvh] w-[100vw] font-arabic"
     >
       <Image src="/favicon.jpg" fill alt="logo" className="hidden" />
       <div className="bg-black/50 absolute inset-0 z-50 w-full h-full black-overlay" />
 
       {/* Main text overlay - responsive positioning and sizing */}
-      <div className="pointer-events-none absolute z-60 top-[2%]  lg:top-[15%] w-full h-full main-text px-4 sm:px-6 lg:px-8">
+      <div
+        className={`pointer-events-none absolute z-60 ${height < 667 ? "top-[8%]" : "top-[15%]"}   lg:top-[15%] w-full h-full main-text px-4 sm:px-6 lg:px-8`}
+      >
         {/* "وأخيرا" heading - responsive font sizes */}
         <h2 className="overflow-clip text-center font-medium  sm:py-2 text-[3rem] sm:text-5xl md:text-6xl lg:text-7xl my-1 font-arabic">
           وأخيرا
@@ -135,11 +148,13 @@ const Hero = () => {
       </div>
 
       {/* Hero section */}
-      <section className="hero relative z-20 h-screen w-full ">
+      <section className="hero bg absolute top-[0%] z-20 h-full w-full ">
         {/* Background grid - responsive dot sizes and gaps */}
 
         {/* Main content container */}
-        <div className="relative w-full h-full flex flex-col justify-evenly items-center px-4 sm:px-6 lg:px-8">
+        <div
+          className={`absolute ${height < 667 ? "top-[30%]" : "top-[35%]"}  w-full  flex flex-col justify-evenly items-center px-4 sm:px-6 lg:px-8`}
+        >
           {/* Spotlight - responsive positioning */}
           <Spotlight
             className="-top-5 sm:-top-10 lg:-top-40 -left-5 sm:-left-10 lg:left-50 z-30"
@@ -147,10 +162,7 @@ const Hero = () => {
           />
 
           {/* Content section - responsive sizing and spacing */}
-          <div className="flex flex-col items-center justify-center gap-2 w-[95%]  max-w-[40rem] h-[60%]  mt-11 lg:mt-24">
-            <div className="w-full h-20 sm:h-32 lg:h-40" />
-            <div className="absolute z-50"></div>
-
+          <div className="flex flex-col items-center justify-center gap-2 w-[95%]  max-w-[40rem] h-[60%]   lg:mt-24">
             {/* Main paragraph - responsive text size and padding */}
             <p className=" text-white    bg-transparent text-center font-light font-arabic text-md  sm:text-xl lg:text-2xl p-3 sm:p-4 lg:p-2 w-[100%] rounded-xl sm:rounded-2xl  mt-6 sm:mt-8 lg:mt-10 border-2 border-black leading-relaxed">
               فريلانسر؟ صانع محتوى؟ صاحب مشروع؟ طالب؟ ولا حتى فضولي تحب تفهم
@@ -165,7 +177,6 @@ const Hero = () => {
               !!! سجل الآن – الأماكن محدودة
             </a>
           </div>
-          <div className=" h-[20vh]  w-full" />
           {/* Bottom section - responsive spacing and sizes */}
         </div>
       </section>

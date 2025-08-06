@@ -20,10 +20,6 @@ interface RotationProxy {
   z: number;
 }
 
-interface ScaleProxy {
-  value: number;
-}
-
 type RotationTuple = [number, number, number];
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
@@ -32,6 +28,7 @@ export function Scene(): React.JSX.Element {
   const [rotation, setRotation] = useState<RotationTuple>([0, 0, 0]);
   const [isMobileDevice, setIsMobileDevice] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState<number>(0);
 
   useEffect(() => {
     const checkMobile = (): boolean =>
@@ -40,11 +37,18 @@ export function Scene(): React.JSX.Element {
         navigator.userAgent
       );
 
-    const handleResize = (): void => setIsMobileDevice(checkMobile());
+    const handleResize = (): void => {
+      setIsMobileDevice(checkMobile());
+      setHeight(window.innerHeight);
+    };
 
-    setIsMobileDevice(checkMobile());
+    handleResize(); // Initial setup
+
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   const setWillChange = (
@@ -80,7 +84,7 @@ export function Scene(): React.JSX.Element {
     const allTimelines = [
       {
         trigger: "#Who",
-        start: "-140% center",
+        start: height < 667 ? "-120% center" : "-140% center",
         end: "160% center",
         steps: [
           {
