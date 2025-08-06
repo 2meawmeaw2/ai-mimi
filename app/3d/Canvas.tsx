@@ -142,15 +142,15 @@ export function Scene(): React.JSX.Element {
           {
             xPercent: -30,
             x: Math.PI,
-            y: -Math.PI * 1,
-            z: Math.PI * 2 + Math.PI / 6,
+            y: -Math.PI * 1 - Math.PI / 6,
+            z: Math.PI * 2 - Math.PI / 6,
             opacity: 1,
           },
         ],
       },
       {
         trigger: "#Contact",
-        start: "top center",
+        start: "10% center",
         end: "60% center",
         steps: [
           {
