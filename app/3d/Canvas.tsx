@@ -80,7 +80,7 @@ export function Scene(): React.JSX.Element {
     const allTimelines = [
       {
         trigger: "#Who",
-        start: "-160% center",
+        start: "-140% center",
         end: "160% center",
         steps: [
           {
