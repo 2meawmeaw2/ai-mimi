@@ -146,7 +146,7 @@ const Hero = () => {
           />
 
           {/* Content section - responsive sizing and spacing */}
-          <div className="flex flex-col items-center justify-center gap-2 w-[95%] sm:w-[90%] max-w-[40rem] h-[60%] sm:h-[70%]  lg:mt-24">
+          <div className="flex flex-col items-center justify-center gap-2 w-[95%]  max-w-[40rem] h-[60%]  mt-11 lg:mt-24">
             <div className="w-full h-20 sm:h-32 lg:h-40" />
             <div className="absolute z-50"></div>
 
