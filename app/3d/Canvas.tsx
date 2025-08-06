@@ -221,7 +221,7 @@ export function Scene(): React.JSX.Element {
       {" "}
       <div
         ref={containerRef}
-        className="fixed -bottom-20 z-60 h-[50dvh] w-full pointer-events-none"
+        className="fixed -bottom-10 z-60 h-[50dvh] w-full pointer-events-none"
         style={{ willChange: isMobileDevice ? "transform, opacity" : "auto" }}
       >
         <Canvas
