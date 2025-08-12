@@ -116,7 +116,7 @@ const Hero = () => {
   return (
     <section
       id="Hero"
-      className="fixed z-60  top-0 h-[120dvh] w-[100vw] font-arabic"
+      className="fixed z-50  top-0 h-[120dvh] w-[100vw] font-arabic"
     >
       <Image src="/favicon.jpg" fill alt="logo" className="hidden" />
       <div className="bg-black/50 absolute inset-0 z-50 w-full h-full black-overlay" />

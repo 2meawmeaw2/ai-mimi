@@ -1,6 +1,26 @@
 "use client";
 import React, { useState } from "react";
-
+declare global {
+  interface Window {
+    fbq: {
+      (command: "init", pixelId: string): void;
+      (
+        command: "track",
+        eventName: string,
+        parameters?: Record<string, string | number | boolean>
+      ): void;
+      (
+        command: "trackCustom",
+        eventName: string,
+        parameters?: Record<string, string | number | boolean>
+      ): void;
+      callMethod?: (...args: unknown[]) => void;
+      queue?: unknown[];
+      loaded?: boolean;
+      version?: string;
+    };
+  }
+}
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -38,6 +58,12 @@ const Contact = () => {
       if (response.ok) {
         setIsSubmitted(true);
         setFormData({ name: "", email: "", number: "", message: "" });
+        if (typeof window !== "undefined" && typeof window.fbq === "function") {
+          window.fbq("track", "Purchase", {
+            currency: "USD",
+            value: 49.99,
+          });
+        }
       } else {
         const err = await response.json();
         console.error("Email sending failed:", err);

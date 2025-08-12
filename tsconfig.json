@@ -27,10 +27,12 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "public/robot.jsx",
-    "app/3d/try.jsx",
-    "app/3d/Canvas.jsx",
-    "app/3d/Canvas.jsx"
+    "public/Room.jsx",
+    "app/component/Text.jsx",
+    "../../save/Screen.jsx",
+    "public/monitor_vii_series_finale_gltf/screen.jsx",
+    "app/component2D/card.jsx",
+    "app/sections/try.jsx"
   ],
   "exclude": ["node_modules"]
 }
