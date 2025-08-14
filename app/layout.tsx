@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { cairo, outfit } from "@/lib/fonts"; // corrected path if needed
+import { cairo } from "@/lib/fonts"; // corrected path if needed
 import { ReactLenis } from "@/lib/ReactLenis";
 import Script from "next/script";
 
@@ -43,7 +43,7 @@ export default function RootLayout({
 
         <ReactLenis root>
           <body
-            className={` relative ${cairo.variable} ${outfit.variable} font-arabic antialiased overflow-x-clip`}
+            className={` relative ${cairo.variable}  font-arabic antialiased overflow-x-clip`}
           >
             {children}
           </body>

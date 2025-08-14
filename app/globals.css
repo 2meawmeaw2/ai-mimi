@@ -14,7 +14,6 @@ body {
 
   --black: #0a0a0a;
   --yellow: #dec531;
-  --font-outfit: var(--font-outfit);
 
   --radius: 0.625rem;
   --background: oklch(1 0 0);
@@ -54,7 +53,6 @@ body {
   --color-white: var(--white);
   --color-black: var(--black);
   --color-yellow: var(--yellow);
-  --font-outfit: var(--font-outfit);
   --font-arabic: var(--font-cairo);
 
   --color-sidebar-ring: var(--sidebar-ring);
