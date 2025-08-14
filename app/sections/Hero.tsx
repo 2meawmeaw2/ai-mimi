@@ -126,12 +126,12 @@ const Hero = () => {
         className={`pointer-events-none absolute z-60 ${height < 667 ? "top-[8%]" : "top-[15%]"}   lg:top-[15%] w-full h-full main-text px-4 sm:px-6 lg:px-8`}
       >
         {/* "وأخيرا" heading - responsive font sizes */}
-        <h2 className="overflow-clip text-center font-medium  sm:py-2 text-[3rem] sm:text-5xl md:text-6xl lg:text-7xl my-1 font-arabic">
+        <h2 className="overflow-clip  text-center font-medium  sm:py-2 text-[3rem] sm:text-5xl md:text-6xl lg:text-7xl my-1 font-arabic">
           وأخيرا
         </h2>
 
         {/* Main AI course heading - responsive font sizes */}
-        <h1 className="overflow-clip ai  text-center font-black text-2xl sm:text-[2rem] md:text-[3rem] lg:text-[4rem] text-yellow font-arabic py-3 sm:py-4 lg:py-6">
+        <h1 className="overflow-clip  ai  text-center font-black text-2xl sm:text-[2rem] md:text-[3rem] lg:text-[4rem] text-yellow font-arabic py-3 sm:py-4 lg:py-6">
           <ShinyText
             text="! دورة الذكاء الاصطناعي للجميع"
             disabled={false}
